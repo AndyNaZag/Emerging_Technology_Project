@@ -118,6 +118,7 @@ const mutation = new GraphQLObjectType({
         heartRate: { type: GraphQLNonNull(GraphQLInt) },
         bloodPressure: { type: GraphQLNonNull(GraphQLString) },
         weight: { type: GraphQLNonNull(GraphQLInt) },
+        motivationalTip: { type: GraphQLNonNull(GraphQLString) },
         nurseId: { type: GraphQLNonNull(GraphQLID) },
       },
       resolve(parent, args) {
@@ -129,6 +130,7 @@ const mutation = new GraphQLObjectType({
           heartRate: args.heartRate,
           bloodPressure: args.bloodPressure,
           weight: args.weight,
+          motivationalTip: args.motivationalTip,
           nurseId: args.nurseId,
         });
         return patient.save();
@@ -146,6 +148,7 @@ const mutation = new GraphQLObjectType({
         heartRate: { type: GraphQLInt },
         bloodPressure: { type: GraphQLString },
         weight: { type: GraphQLInt },
+        motivationalTip: { type: GraphQLString },
         nurseId: { type: GraphQLID },
       },
       resolve(parent, args) {
@@ -160,6 +163,7 @@ const mutation = new GraphQLObjectType({
               heartRate: args.heartRate,
               bloodPressure: args.bloodPressure,
               weight: args.weight,
+              motivationalTip: args.motivationalTip,
               nurseId: args.nurseId,
             },
           },
