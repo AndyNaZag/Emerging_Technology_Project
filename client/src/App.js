@@ -2,9 +2,9 @@ import Header from "./components/partials/Header";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 import Patients from "./components/pages/Patients";
 import Login from "./components/pages/Login";
-import AuthContext from "./components/context/auth-context";
+import AuthContext from "./components/context/authContext";
 import { Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -33,13 +33,27 @@ const client = new ApolloClient({
 
 function App() {
   const [state, setState] = useState({ token: null, role: null, userId: null });
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role");
+    const userId = localStorage.getItem("userId");
+    if (token && role && userId) {
+      setState({ token: token, role: role, userId: userId });
+    }
+  }, []);
 
   const login = (token, role, userId, tokenExpiration) => {
     setState({ token: token, role: role, userId: userId });
+    localStorage.setItem("token", token);
+    localStorage.setItem("role", role);
+    localStorage.setItem("userId", userId);
   };
 
   const logout = () => {
     setState({ token: null, role: null, userId: null });
+    localStorage.setItem("token", "");
+    localStorage.setItem("role", "");
+    localStorage.setItem("userId", "");
   };
 
   return (
@@ -56,8 +70,10 @@ function App() {
         >
           <Header />
           <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/patients" element={<Patients />} />
+            {!state.token && <Route path="/" element={<Login />} />}
+            {state.token && state.role === "Nurse" && (
+              <Route path="/" element={<Patients />} />
+            )}
           </Routes>
         </AuthContext.Provider>
       </ApolloProvider>

@@ -3,7 +3,7 @@ import logo from "./../assets/medicalapp.png";
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "../../mutations/authMutations";
 import { useState, useContext } from "react";
-import AuthContext from "../context/auth-context";
+import AuthContext from "../context/authContext";
 
 export default function Login() {
   const [role, setRole] = useState("PATIENT");
