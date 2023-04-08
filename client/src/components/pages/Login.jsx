@@ -2,15 +2,22 @@ import "../styles/components.scss";
 import logo from "./../assets/medicalapp.png";
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "../../mutations/authMutations";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import AuthContext from "../context/auth-context";
 
 export default function Login() {
-  const [role, setRole] = useState("Patient");
+  const [role, setRole] = useState("PATIENT");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [login] = useMutation(LOGIN, {
     variables: { role, username, password },
+    onCompleted: (data) => {
+      console.log(data);
+      authContext.login(data.login.token, data.login.role, data.login.userId);
+    },
   });
+
+  const authContext = useContext(AuthContext);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -25,8 +32,6 @@ export default function Login() {
     setUsername("");
     setPassword("");
   };
-
-  // const [login] = useQuery(LOGIN, {
 
   return (
     <>

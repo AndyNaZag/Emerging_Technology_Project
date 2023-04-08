@@ -66,6 +66,7 @@ const EmergencyAlertType = new GraphQLObjectType({
 const AuthData = new GraphQLObjectType({
   name: "AuthData",
   fields: () => ({
+    role: { type: GraphQLString },
     userId: { type: GraphQLID },
     token: { type: GraphQLString },
     tokenExpiration: { type: GraphQLInt },
@@ -156,7 +157,12 @@ const mutation = new GraphQLObjectType({
             expiresIn: "1h",
           }
         );
-        return { userId: user.id, token: token, tokenExpiration: 1 };
+        return {
+          role: args.role,
+          userId: user.id,
+          token: token,
+          tokenExpiration: 1,
+        };
       },
     },
     //Create a Nurse
