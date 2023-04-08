@@ -6,6 +6,7 @@ const { graphqlHTTP } = require("express-graphql");
 const schema = require("./schema/schema");
 const connectDB = require("./config/db");
 const port = process.env.PORT || 5000;
+const isAuth = require("./middleware/is-auth");
 
 const app = express();
 
@@ -14,6 +15,9 @@ connectDB();
 
 //CORS Policy
 app.use(cors());
+
+//Middleware
+app.use(isAuth);
 
 app.use(
   "/graphql",

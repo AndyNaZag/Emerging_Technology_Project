@@ -1,12 +1,15 @@
 const Nurse = require("../models/Nurse.js");
 const Patient = require("../models/Patient.js");
 const EmergencyAlert = require("../models/EmergencyAlert.js");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const {
   GraphQLObjectType,
   GraphQLID,
   GraphQLString,
   GraphQLInt,
+  GraphQLEnumType,
   GraphQLSchema,
   GraphQLList,
   GraphQLNonNull,
@@ -46,7 +49,7 @@ const NurseType = new GraphQLObjectType({
 
 //Emergency Alert Type
 const EmergencyAlertType = new GraphQLObjectType({
-  name: "Patient",
+  name: "EmergencyAlert",
   fields: () => ({
     id: { type: GraphQLID },
     message: { type: GraphQLString },
@@ -59,10 +62,63 @@ const EmergencyAlertType = new GraphQLObjectType({
   }),
 });
 
+//Auth Data Type
+const AuthData = new GraphQLObjectType({
+  name: "AuthData",
+  fields: () => ({
+    userId: { type: GraphQLID },
+    token: { type: GraphQLString },
+    tokenExpiration: { type: GraphQLInt },
+  }),
+});
+
 //QUERIES
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
+    login: {
+      type: AuthData,
+      args: {
+        role: {
+          type: new GraphQLEnumType({
+            name: "Role",
+            values: {
+              NURSE: { value: "Nurse" },
+              PATIENT: { value: "Patient" },
+            },
+          }),
+        },
+        username: { type: GraphQLString },
+        password: { type: GraphQLString },
+      },
+      async resolve(parent, args) {
+        let user;
+        if (args.role === "Patient") {
+          user = await Patient.findOne({ username: args.username });
+        } else if (args.role === "Nurse") {
+          user = await Nurse.findOne({ username: args.username });
+        }
+        if (!user) {
+          throw new Error("User does not exist!");
+        }
+        const isEqual = await bcrypt.compare(args.password, user.password);
+        if (!isEqual) {
+          throw new Error("Password is incorrect!");
+        }
+        const token = jwt.sign(
+          {
+            userId: user.id,
+            username: user.username,
+            role: args.role,
+          },
+          "somesupersecretkey",
+          {
+            expiresIn: "1h",
+          }
+        );
+        return { userId: user.id, token: token, tokenExpiration: 1 };
+      },
+    },
     patients: {
       type: new GraphQLList(PatientType),
       resolve(parent, args) {
@@ -102,21 +158,33 @@ const RootQuery = new GraphQLObjectType({
 const mutation = new GraphQLObjectType({
   name: "Mutation",
   fields: {
-    //Add a Nurse
-    addNurse: {
+    //Create a Nurse
+    createNurse: {
       type: NurseType,
       args: {
         name: { type: GraphQLNonNull(GraphQLString) }, //The name cannot be null
         username: { type: GraphQLNonNull(GraphQLString) },
         password: { type: GraphQLNonNull(GraphQLString) },
       },
-      resolve(parent, args) {
-        const nurse = new Nurse({
-          name: args.name,
-          username: args.username,
-          password: args.password,
-        });
-        return nurse.save();
+      async resolve(parent, args) {
+        try {
+          const existingNurse = await Nurse.findOne({
+            username: args.username,
+          });
+          if (existingNurse) {
+            throw new Error("Nurse already exists!");
+          }
+          const hashedPassword = await bcrypt.hash(args.password, 12);
+          const nurse = new Nurse({
+            name: args.name,
+            username: args.username,
+            password: hashedPassword,
+          });
+          const result = await nurse.save();
+          return { ...result._doc, password: null, _id: result.id };
+        } catch (err) {
+          throw err;
+        }
       },
     },
     //Delete a Nurse
@@ -173,7 +241,10 @@ const mutation = new GraphQLObjectType({
         motivationalTip: { type: GraphQLString },
         nurseId: { type: GraphQLID },
       },
-      resolve(parent, args) {
+      resolve(parent, args, req) {
+        // if (!req.isAuth) {
+        //   throw new Error("Unauthenticated!");
+        // }                                          //Only if the user is authenticated
         return Patient.findByIdAndUpdate(
           args.id,
           {
