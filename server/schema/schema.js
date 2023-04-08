@@ -1,5 +1,6 @@
 const Nurse = require("../models/Nurse.js");
 const Patient = require("../models/Patient.js");
+const EmergencyAlert = require("../models/EmergencyAlert.js");
 
 const {
   GraphQLObjectType,
@@ -43,6 +44,21 @@ const NurseType = new GraphQLObjectType({
   }),
 });
 
+//Emergency Alert Type
+const EmergencyAlertType = new GraphQLObjectType({
+  name: "Patient",
+  fields: () => ({
+    id: { type: GraphQLID },
+    message: { type: GraphQLString },
+    patient: {
+      type: PatientType,
+      resolve(parent, args) {
+        return Patient.findById(parent.patientId);
+      },
+    },
+  }),
+});
+
 //QUERIES
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
@@ -71,6 +87,12 @@ const RootQuery = new GraphQLObjectType({
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
         return Nurse.findById(args.id);
+      },
+    },
+    emergencyAlerts: {
+      type: new GraphQLList(EmergencyAlertType),
+      resolve(parent, args) {
+        return EmergencyAlert.find();
       },
     },
   },
@@ -179,6 +201,31 @@ const mutation = new GraphQLObjectType({
       },
       resolve(parent, args) {
         return Patient.findByIdAndRemove(args.id);
+      },
+    },
+    //Add an Emergency Alert
+    addEmergencyAlert: {
+      type: EmergencyAlertType,
+      args: {
+        message: { type: GraphQLNonNull(GraphQLString) },
+        patientId: { type: GraphQLNonNull(GraphQLID) },
+      },
+      resolve(parent, args) {
+        const emergencyAlert = new EmergencyAlert({
+          message: args.message,
+          patientId: args.patientId,
+        });
+        return emergencyAlert.save();
+      },
+    },
+    //Delete an Emergency Alert
+    deleteEmergencyAlert: {
+      type: EmergencyAlertType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+      },
+      resolve(parent, args) {
+        return EmergencyAlert.findByIdAndRemove(args.id);
       },
     },
   },
