@@ -1,7 +1,7 @@
-import { gql, useQuery } from "@apollo/client";
-import PatientRow from "./PatientRow";
-import Spinner from "./Spinner";
-import { GET_PATIENTS } from "../queries/patientQueries";
+import { useQuery } from "@apollo/client";
+import PatientRow from "../elements/PatientRow";
+import Spinner from "../elements/Spinner";
+import { GET_PATIENTS } from "../../queries/patientQueries";
 
 export default function Patients() {
   const { loading, error, data } = useQuery(GET_PATIENTS);

@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Oswald:wght@400;500;700&family=Roboto:wght@100;400;500;600;700&display=swap");
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -13,7 +15,7 @@ code {
 }
 
 .navbar-brand {
-  color: #df3ca6;
+  color: var(--primary);
 }
 
 .navbar-brand img {
@@ -27,24 +29,52 @@ code {
 
 .btn-primary,
 .bg-primary {
-  background-color: #df3ca6 !important;
+  background-color: var(--primary) !important;
   border: none;
 }
 
 .btn-primary:hover {
-  background-color: #df3ca6;
+  background-color: var(--gray) !important;
   opacity: 0.9;
 }
 
 .btn-secondary {
-  background-color: #7430f9;
+  background-color: var(--secondary) !important;
 }
 
 .btn-secondary:hover {
-  background-color: #7430f9;
+  background-color: var(--gray) !important;
   opacity: 0.9;
 }
 
 .icon {
   margin-right: 5px;
+}
+
+.rto {
+  font-family: "Roboto", sans-serif !important;
+}
+.op-s {
+  font-family: "Open Sans", sans-serif !important;
+}
+
+/* .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+:root {
+  --primary: #2c99b4;
+  --secondary: #2ab694;
+  --light: #f8f9fa;
+  --dark: #343a40;
+  --danger: #dc3565;
+  --success: #28a745;
+  --warning: #ffc107;
+  --info: #17a2b8;
+  --white: #fff;
+  --gray: #6c757d;
+  --gray-dark: #343a40;
+  --black: #000;
 }

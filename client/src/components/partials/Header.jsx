@@ -1,8 +1,8 @@
-import logo from "./assets/medicalapp.png";
+import logo from "./../assets/medicalapp.png";
 
 export default function Header() {
   return (
-    <nav className="navbar bg-light mb-4 p-0">
+    <nav className="navbar bg-light p-0">
       <div>
         <a className="navbar-brand" href="/">
           <div className="d-flex">

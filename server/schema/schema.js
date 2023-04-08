@@ -76,6 +76,46 @@ const AuthData = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
+    patients: {
+      type: new GraphQLList(PatientType),
+      resolve(parent, args) {
+        return Patient.find();
+      },
+    },
+    patient: {
+      type: PatientType,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return Patient.findById(args.id);
+      },
+    },
+    nurses: {
+      type: new GraphQLList(NurseType),
+      resolve(parent, args) {
+        return Nurse.find();
+      },
+    },
+    nurse: {
+      type: NurseType,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return Nurse.findById(args.id);
+      },
+    },
+    emergencyAlerts: {
+      type: new GraphQLList(EmergencyAlertType),
+      resolve(parent, args) {
+        return EmergencyAlert.find();
+      },
+    },
+  },
+});
+
+//MUTATIONS
+const mutation = new GraphQLObjectType({
+  name: "Mutation",
+  fields: {
+    //Login
     login: {
       type: AuthData,
       args: {
@@ -119,45 +159,6 @@ const RootQuery = new GraphQLObjectType({
         return { userId: user.id, token: token, tokenExpiration: 1 };
       },
     },
-    patients: {
-      type: new GraphQLList(PatientType),
-      resolve(parent, args) {
-        return Patient.find();
-      },
-    },
-    patient: {
-      type: PatientType,
-      args: { id: { type: GraphQLID } },
-      resolve(parent, args) {
-        return Patient.findById(args.id);
-      },
-    },
-    nurses: {
-      type: new GraphQLList(NurseType),
-      resolve(parent, args) {
-        return Nurse.find();
-      },
-    },
-    nurse: {
-      type: NurseType,
-      args: { id: { type: GraphQLID } },
-      resolve(parent, args) {
-        return Nurse.findById(args.id);
-      },
-    },
-    emergencyAlerts: {
-      type: new GraphQLList(EmergencyAlertType),
-      resolve(parent, args) {
-        return EmergencyAlert.find();
-      },
-    },
-  },
-});
-
-//MUTATIONS
-const mutation = new GraphQLObjectType({
-  name: "Mutation",
-  fields: {
     //Create a Nurse
     createNurse: {
       type: NurseType,

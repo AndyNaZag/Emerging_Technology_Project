@@ -1,0 +1,26 @@
+//Responsive
+@mixin device($breakpoint) {
+  @if $breakpoint == phone {
+    @media only screen and (min-width: 150px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == tablet {
+    @media only screen and (min-width: 428px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == tabland {
+    @media only screen and (min-width: 768px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == desktop {
+    @media only screen and (min-width: 1024px) {
+      @content;
+    }
+  }
+}
