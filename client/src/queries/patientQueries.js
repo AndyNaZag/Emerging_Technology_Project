@@ -9,6 +9,10 @@ const GET_PATIENTS = gql`
       heartRate
       bloodPressure
       weight
+      nurse {
+        id
+        name
+      }
     }
   }
 `;

@@ -1,19 +1,27 @@
 import { gql } from "@apollo/client";
 
-const ADD_PATIENT = gql`
-  mutation AddPatient(
+const CREATE_PATIENT = gql`
+  mutation CreatePatient(
     $name: String!
-    $temperature: Float!
+    $username: String!
+    $password: String!
+    $temperature: Int!
     $heartRate: Int!
-    $bloodPressure: Int!
+    $bloodPressure: String!
     $weight: Int!
+    $motivationalTip: String!
+    $nurseId: ID!
   ) {
-    addPatient(
+    createPatient(
       name: $name
+      username: $username
+      password: $password
       temperature: $temperature
       heartRate: $heartRate
       bloodPressure: $bloodPressure
       weight: $weight
+      motivationalTip: $motivationalTip
+      nurseId: $nurseId
     ) {
       id
       name
@@ -23,11 +31,51 @@ const ADD_PATIENT = gql`
       heartRate
       bloodPressure
       weight
+      motivationalTip
+      nurse {
+        id
+        name
+      }
     }
   }
 `;
 
-export { ADD_PATIENT };
+const UPDATE_PATIENT = gql`
+  mutation UpdatePatient(
+    $id: ID!
+    $password: String
+    $temperature: Int
+    $heartRate: Int
+    $bloodPressure: String
+    $weight: Int
+    $motivationalTip: String
+    $nurseId: ID
+  ) {
+    updatePatient(
+      id: $id
+      password: $password
+      temperature: $temperature
+      heartRate: $heartRate
+      bloodPressure: $bloodPressure
+      weight: $weight
+      motivationalTip: $motivationalTip
+      nurseId: $nurseId
+    ) {
+      id
+      name
+      username
+      password
+      temperature
+      heartRate
+      bloodPressure
+      weight
+      nurse {
+        id
+        name
+      }
+    }
+  }
+`;
 
 const DELETE_PATIENT = gql`
   mutation DeletePatient($id: ID!) {
@@ -44,4 +92,4 @@ const DELETE_PATIENT = gql`
   }
 `;
 
-export { DELETE_PATIENT };
+export { CREATE_PATIENT, UPDATE_PATIENT, DELETE_PATIENT };

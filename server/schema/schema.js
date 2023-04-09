@@ -205,7 +205,7 @@ const mutation = new GraphQLObjectType({
       },
     },
     //Add a Patient
-    addPatient: {
+    createPatient: {
       type: PatientType,
       args: {
         name: { type: GraphQLNonNull(GraphQLString) }, //The name cannot be null
@@ -218,19 +218,32 @@ const mutation = new GraphQLObjectType({
         motivationalTip: { type: GraphQLNonNull(GraphQLString) },
         nurseId: { type: GraphQLNonNull(GraphQLID) },
       },
-      resolve(parent, args) {
-        const patient = new Patient({
-          name: args.name,
-          username: args.username,
-          password: args.password,
-          temperature: args.temperature,
-          heartRate: args.heartRate,
-          bloodPressure: args.bloodPressure,
-          weight: args.weight,
-          motivationalTip: args.motivationalTip,
-          nurseId: args.nurseId,
-        });
-        return patient.save();
+      async resolve(parent, args) {
+        try {
+          const existingPatient = await Patient.findOne({
+            username: args.username,
+          });
+          if (existingPatient) {
+            throw new Error("Patient already exists!");
+          }
+          const hashedPassword = await bcrypt.hash(args.password, 12);
+
+          const patient = new Patient({
+            name: args.name,
+            username: args.username,
+            password: args.password,
+            temperature: args.temperature,
+            heartRate: args.heartRate,
+            bloodPressure: args.bloodPressure,
+            weight: args.weight,
+            motivationalTip: args.motivationalTip,
+            nurseId: args.nurseId,
+          });
+          const result = await patient.save();
+          return { ...result._doc, password: null, _id: result.id };
+        } catch (err) {
+          throw err;
+        }
       },
     },
     //Update a Patient

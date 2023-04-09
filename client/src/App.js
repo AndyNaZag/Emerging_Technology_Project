@@ -1,6 +1,6 @@
 import Header from "./components/partials/Header";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
-import Patients from "./components/pages/Patients";
+import Home from "./components/pages/Home";
 import Login from "./components/pages/Login";
 import AuthContext from "./components/context/authContext";
 import { Routes, Route } from "react-router-dom";
@@ -72,7 +72,7 @@ function App() {
           <Routes>
             {!state.token && <Route path="/" element={<Login />} />}
             {state.token && state.role === "Nurse" && (
-              <Route path="/" element={<Patients />} />
+              <Route path="/" element={<Home />} />
             )}
           </Routes>
         </AuthContext.Provider>

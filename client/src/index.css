@@ -58,11 +58,26 @@ code {
   font-family: "Open Sans", sans-serif !important;
 }
 
-/* .container {
+.dir-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.dir-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.center {
   display: flex;
   justify-content: center;
   align-items: center;
-} */
+}
+
+h1 {
+  color: var(--primary);
+}
 
 :root {
   --primary: #2c99b4;

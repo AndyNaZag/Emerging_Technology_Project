@@ -17,6 +17,11 @@
   }
 }
 
+.wp-bgw {
+  background-image: none;
+  background-color: #fff;
+}
+
 .form {
   width: 90vw;
   min-width: 280px;
@@ -60,4 +65,16 @@
     min-height: 200px;
     object-fit: contain;
   }
+}
+
+//Patient Row Component
+.patient-row {
+  cursor: pointer;
+}
+
+//Home Component
+.logo-big {
+  height: 50px;
+  object-fit: contain;
+  margin-right: 10px;
 }
