@@ -9,6 +9,7 @@ const GET_PATIENTS = gql`
       heartRate
       bloodPressure
       weight
+      motivationalTip
       nurse {
         id
         name
@@ -17,4 +18,22 @@ const GET_PATIENTS = gql`
   }
 `;
 
-export { GET_PATIENTS };
+const GET_PATIENT = gql`
+  query GetPatient($id: ID!) {
+    patient(id: $id) {
+      id
+      name
+      temperature
+      heartRate
+      bloodPressure
+      weight
+      motivationalTip
+      nurse {
+        id
+        name
+      }
+    }
+  }
+`;
+
+export { GET_PATIENTS, GET_PATIENT };

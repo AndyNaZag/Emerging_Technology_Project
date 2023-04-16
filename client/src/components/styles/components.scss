@@ -10,7 +10,9 @@
 
   padding: 1rem;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   @include m.device(desktop) {
     padding: 5rem;
     justify-content: flex-start;
@@ -22,7 +24,7 @@
   background-color: #fff;
 }
 
-.form {
+.form-login {
   width: 90vw;
   min-width: 280px;
   max-width: 550px;
@@ -72,9 +74,61 @@
   cursor: pointer;
 }
 
-//Home Component
+//Nurse Portal Component
 .logo-big {
   height: 50px;
   object-fit: contain;
   margin-right: 10px;
+}
+.logo-small {
+  height: 30px;
+  object-fit: contain;
+  margin-right: 10px;
+}
+
+//Patient Portal Component
+
+.patient-portal-content {
+  width: 100%;
+  max-width: 1500px;
+  height: 100%;
+  justify-content: space-around;
+  align-items: center;
+  padding: 5%;
+  gap: 30px;
+
+  .emergency-alert {
+    max-width: 40vw;
+  }
+
+  #createAlertMsg {
+    .modal-header {
+      background-color: var(--warning);
+    }
+  }
+}
+
+.motivational-tip {
+  margin-top: 25px;
+  display: flex;
+  border: 1px solid grey;
+  border-radius: 20px;
+  background-color: rgba($color: #ffc107, $alpha: 0.7);
+  padding: 2%;
+  justify-content: center;
+  align-items: center;
+
+  h3,
+  h5 {
+    color: var(--dark);
+  }
+
+  img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .dir-row {
+    gap: 10px;
+  }
 }

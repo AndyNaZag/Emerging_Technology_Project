@@ -36,7 +36,7 @@ export default function Login() {
   return (
     <>
       <div className="wrapper">
-        <form action="" className="form" onSubmit={submitHandler}>
+        <form action="" className="form-login" onSubmit={submitHandler}>
           <img src={logo} alt="logo" className="mr-2" />
           <h3>
             <b className="rto">MedApp LogIn</b>
@@ -78,7 +78,7 @@ export default function Login() {
           </div>
           <div className="form-actions">
             <p>
-              Not registered yet? <a href="">Register here</a>
+              Not registered yet? <a href="/register">Register here</a>
             </p>
             <button type="submit" className="btn btn-primary">
               LogIn

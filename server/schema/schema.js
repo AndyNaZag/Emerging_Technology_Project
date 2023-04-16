@@ -27,6 +27,7 @@ const PatientType = new GraphQLObjectType({
     heartRate: { type: GraphQLInt },
     bloodPressure: { type: GraphQLString },
     weight: { type: GraphQLInt },
+    motivationalTip: { type: GraphQLString },
     nurse: {
       type: NurseType,
       resolve(parent, args) {
@@ -231,7 +232,7 @@ const mutation = new GraphQLObjectType({
           const patient = new Patient({
             name: args.name,
             username: args.username,
-            password: args.password,
+            password: hashedPassword,
             temperature: args.temperature,
             heartRate: args.heartRate,
             bloodPressure: args.bloodPressure,
@@ -295,7 +296,7 @@ const mutation = new GraphQLObjectType({
       },
     },
     //Add an Emergency Alert
-    addEmergencyAlert: {
+    createAlert: {
       type: EmergencyAlertType,
       args: {
         message: { type: GraphQLNonNull(GraphQLString) },

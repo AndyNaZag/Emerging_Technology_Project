@@ -1,10 +1,12 @@
 import Header from "./components/partials/Header";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
-import Home from "./components/pages/Home";
+import NursePortal from "./components/pages/NursePortal";
+import PatientPortal from "./components/pages/PatientPortal";
 import Login from "./components/pages/Login";
 import AuthContext from "./components/context/authContext";
 import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
+import Register from "./components/pages/Register";
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -72,8 +74,12 @@ function App() {
           <Routes>
             {!state.token && <Route path="/" element={<Login />} />}
             {state.token && state.role === "Nurse" && (
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<NursePortal />} />
             )}
+            {state.token && state.role === "Patient" && (
+              <Route path="/" element={<PatientPortal />} />
+            )}
+            <Route path="/register" element={<Register />} />
           </Routes>
         </AuthContext.Provider>
       </ApolloProvider>

@@ -34,11 +34,11 @@ export default function Header() {
           {authContext.token && (
             <>
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <a className="nav-link" href="/">
                     Hi, Welcome to the {authContext.role} panel.
                   </a>
-                </li>
+                </li> */}
                 <li className="nav-item">
                   <a className="nav-link" href="/" onClick={logout}>
                     Logout
