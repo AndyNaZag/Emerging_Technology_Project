@@ -170,9 +170,12 @@ const mutation = new GraphQLObjectType({
     createNurse: {
       type: NurseType,
       args: {
-        name: { type: GraphQLNonNull(GraphQLString) }, //The name cannot be null
-        username: { type: GraphQLNonNull(GraphQLString) },
-        password: { type: GraphQLNonNull(GraphQLString) },
+        name: { type: new 
+      GraphQLNonNull(GraphQLString) }, //The name cannot be null
+        username: { type: new 
+      GraphQLNonNull(GraphQLString) },
+        password: { type: new 
+      GraphQLNonNull(GraphQLString) },
       },
       async resolve(parent, args) {
         try {
@@ -199,7 +202,8 @@ const mutation = new GraphQLObjectType({
     deleteNurse: {
       type: NurseType,
       args: {
-        id: { type: GraphQLNonNull(GraphQLID) },
+        id: { type: new 
+      GraphQLNonNull(GraphQLID) },
       },
       resolve(parent, args) {
         return Nurse.findByIdAndRemove(args.id);
@@ -209,15 +213,24 @@ const mutation = new GraphQLObjectType({
     createPatient: {
       type: PatientType,
       args: {
-        name: { type: GraphQLNonNull(GraphQLString) }, //The name cannot be null
-        username: { type: GraphQLNonNull(GraphQLString) },
-        password: { type: GraphQLNonNull(GraphQLString) },
-        temperature: { type: GraphQLNonNull(GraphQLInt) },
-        heartRate: { type: GraphQLNonNull(GraphQLInt) },
-        bloodPressure: { type: GraphQLNonNull(GraphQLString) },
-        weight: { type: GraphQLNonNull(GraphQLInt) },
-        motivationalTip: { type: GraphQLNonNull(GraphQLString) },
-        nurseId: { type: GraphQLNonNull(GraphQLID) },
+        name: { type: new 
+      GraphQLNonNull(GraphQLString) }, //The name cannot be null
+        username: { type: new 
+      GraphQLNonNull(GraphQLString) },
+        password: { type: new 
+      GraphQLNonNull(GraphQLString) },
+        temperature: { type: new 
+      GraphQLNonNull(GraphQLInt) },
+        heartRate: { type: new 
+      GraphQLNonNull(GraphQLInt) },
+        bloodPressure: { type: new 
+      GraphQLNonNull(GraphQLString) },
+        weight: { type: new 
+      GraphQLNonNull(GraphQLInt) },
+        motivationalTip: { type: new 
+      GraphQLNonNull(GraphQLString) },
+        nurseId: { type: new 
+      GraphQLNonNull(GraphQLID) },
       },
       async resolve(parent, args) {
         try {
@@ -251,7 +264,8 @@ const mutation = new GraphQLObjectType({
     updatePatient: {
       type: PatientType,
       args: {
-        id: { type: GraphQLNonNull(GraphQLID) },
+        id: { type: new 
+      GraphQLNonNull(GraphQLID) },
         name: { type: GraphQLString },
         username: { type: GraphQLString },
         password: { type: GraphQLString },
@@ -289,7 +303,8 @@ const mutation = new GraphQLObjectType({
     deletePatient: {
       type: PatientType,
       args: {
-        id: { type: GraphQLNonNull(GraphQLID) },
+        id: { type: new 
+      GraphQLNonNull(GraphQLID) },
       },
       resolve(parent, args) {
         return Patient.findByIdAndRemove(args.id);
@@ -299,8 +314,10 @@ const mutation = new GraphQLObjectType({
     createAlert: {
       type: EmergencyAlertType,
       args: {
-        message: { type: GraphQLNonNull(GraphQLString) },
-        patientId: { type: GraphQLNonNull(GraphQLID) },
+        message: { type: new 
+      GraphQLNonNull(GraphQLString) },
+        patientId: { type: new 
+      GraphQLNonNull(GraphQLID) },
       },
       resolve(parent, args) {
         const emergencyAlert = new EmergencyAlert({
@@ -314,7 +331,8 @@ const mutation = new GraphQLObjectType({
     deleteEmergencyAlert: {
       type: EmergencyAlertType,
       args: {
-        id: { type: GraphQLNonNull(GraphQLID) },
+        id: { type: new 
+      GraphQLNonNull(GraphQLID) },
       },
       resolve(parent, args) {
         return EmergencyAlert.findByIdAndRemove(args.id);

@@ -1,5 +1,5 @@
 import "../styles/components.scss";
-import logo from "./../assets/medicalapp.png";
+import logo from "./../assets/examination.png";
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "../../mutations/authMutations";
 import { useState, useContext } from "react";

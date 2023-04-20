@@ -4,8 +4,12 @@ import { useMutation } from "@apollo/client";
 import { useState } from "react";
 import { CREATE_PATIENT } from "../../mutations/patientMutations";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import { GET_NURSES } from "../../queries/nurseQueries";
 
 export default function Register() {
+
+  const { loading, error, data } = useQuery(GET_NURSES);
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
@@ -14,9 +18,13 @@ export default function Register() {
   const [heartRate, setHeartRate] = useState(0);
   const [bloodPressure, setBloodPressure] = useState("");
   const [weight, setWeight] = useState(0);
+
   const motivationalTip =
     "It is never too late to start taking care of your body, welcome to medApp"; //Motivational tip by default when a patient registers
-  const [nurseId, setNurseId] = useState("");
+  
+    const [nurseId, setNurseId] = useState("");
+    
+
   const [register] = useMutation(CREATE_PATIENT, {
     variables: {
       name,
@@ -83,17 +91,21 @@ export default function Register() {
     setWeight(0);
     setNurseId("");
   };
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :(</p>;
 
+  const nurses = data.nurses;
   return (
     <>
       <div className="wrapper wp-bgw">
+      <div className="patient-portal-content">
         <form action="" className="form" onSubmit={submitHandler}>
-          <img src={logo} alt="logo" className="mr-2" />
+         
           <h2>
-            <b className="rto">Welcome to MedApp</b>
+            <b className="rto center">Welcome to MedApp</b>
           </h2>
           <h4>
-            <b className="rto">
+            <b className="rto center mt-2">
               Register and become a patient of the #1 Healthcare Plan in Canada
             </b>
           </h4>
@@ -175,23 +187,28 @@ export default function Register() {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="nurseId">Nurse ID:</label>
-            <input
-              type="text"
-              id="nurseId"
-              placeholder="Enter nurse ID"
-              className="form-control"
-              value={nurseId}
-              onChange={(e) => setNurseId(e.target.value)}
-            />
-          </div>
-
-          <div className="form-actions">
+              <label htmlFor="nurseId">Nurse:</label>
+              <select
+                id="nurseId"
+                className="form-control"
+                value={nurseId}
+                onChange={(e) => setNurseId(e.target.value)}
+              >
+                <option value="">Select a nurse</option>
+                {nurses.map((nurse) => (
+                  <option key={nurse.id} value={nurse.id}>
+                    {nurse.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          <div className="form-actions center mt-5">
             <button type="submit" className="btn btn-primary">
               Register
             </button>
           </div>
         </form>
+        </div>
       </div>
     </>
   );

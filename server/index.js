@@ -19,12 +19,9 @@ app.use(cors());
 //Middleware
 app.use(isAuth);
 
-app.use(
-  "/graphql",
-  graphqlHTTP({
-    schema,
-    graphiql: process.env.NODE_ENV === "development",
-  })
-);
+app.use('/graphql', graphqlHTTP({
+  schema,
+  graphiql: true,
+}));
 
 app.listen(port, console.log(`Server is running on port ${port}`));

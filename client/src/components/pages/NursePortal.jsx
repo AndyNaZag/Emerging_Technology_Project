@@ -14,8 +14,9 @@ export default function NursePortal() {
 
   return (
     <>
-      <section className="wrapper wp-bgw">
+      <section className="wrapper wp-bgw ">
         <div className="dir-col center">
+          <div className="dir-row patient-portal-content">
           <div className="dir-row">
             <img
               src={nursePortal}
@@ -24,7 +25,7 @@ export default function NursePortal() {
             />
             <h1>NURSE PORTAL</h1>
           </div>
-          <div className="dir-row patient-portal-content">
+          <div className="dir-row ">
             <div className="dir-col">
               <div className="dir-row">
                 {/* <img
@@ -50,6 +51,7 @@ export default function NursePortal() {
               </div>
             </div>
           </div>
+        </div>
         </div>
       </section>
     </>

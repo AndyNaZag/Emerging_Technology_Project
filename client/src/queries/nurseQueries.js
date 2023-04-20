@@ -10,4 +10,14 @@ const GET_NURSES = gql`
   }
 `;
 
-export { GET_NURSES };
+const GET_CURRENT_NURSE = gql`
+  query GetCurrentNurse {
+    currentNurse {
+      id
+      name
+      username
+    }
+  }
+`;
+
+export { GET_NURSES, GET_CURRENT_NURSE };
