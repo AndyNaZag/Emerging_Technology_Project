@@ -10,6 +10,7 @@ const CREATE_PATIENT = gql`
     $bloodPressure: String!
     $weight: Int!
     $motivationalTip: String!
+    $alertMsg: String
     $nurseId: ID!
   ) {
     createPatient(
@@ -21,6 +22,7 @@ const CREATE_PATIENT = gql`
       bloodPressure: $bloodPressure
       weight: $weight
       motivationalTip: $motivationalTip
+      alertMsg: $alertMsg
       nurseId: $nurseId
     ) {
       id
@@ -32,6 +34,7 @@ const CREATE_PATIENT = gql`
       bloodPressure
       weight
       motivationalTip
+      alertMsg
       nurse {
         id
         name
@@ -49,6 +52,7 @@ const UPDATE_PATIENT = gql`
     $bloodPressure: String
     $weight: Int
     $motivationalTip: String
+    $alertMsg: String
     $nurseId: ID
   ) {
     updatePatient(
@@ -59,6 +63,7 @@ const UPDATE_PATIENT = gql`
       bloodPressure: $bloodPressure
       weight: $weight
       motivationalTip: $motivationalTip
+      alertMsg: $alertMsg
       nurseId: $nurseId
     ) {
       id
@@ -69,6 +74,8 @@ const UPDATE_PATIENT = gql`
       heartRate
       bloodPressure
       weight
+      motivationalTip
+      alertMsg
       nurse {
         id
         name
@@ -88,6 +95,8 @@ const DELETE_PATIENT = gql`
       heartRate
       bloodPressure
       weight
+      motivationalTip
+      alertMsg
     }
   }
 `;

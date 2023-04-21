@@ -1,14 +1,20 @@
 import logo from "./../assets/medicalapp.png";
 import AuthContext from "../context/authContext";
 import { useContext } from "react";
+import { GET_ALERTS } from "../../queries/alertQueries";
+import { useQuery } from "@apollo/client";
+import Spinner from "../elements/Spinner";
 
 export default function Header() {
   const authContext = useContext(AuthContext);
-  console.log(authContext);
+  const { loading, error, data } = useQuery(GET_ALERTS);
 
   const logout = () => {
     authContext.logout();
   };
+
+  if (loading) return <Spinner />;
+  if (error) return <p>Error: Something went wrong</p>;
 
   return (
     <nav className="navbar navbar-expand-lg bg-light">
@@ -33,12 +39,22 @@ export default function Header() {
         <div className="collapse navbar-collapse" id="navbarNavDropdown">
           {authContext.token && (
             <>
-              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <ul className="navbar-nav mb-2 mb-lg-0">
                 {/* <li className="nav-item">
                   <a className="nav-link" href="/">
                     Hi, Welcome to the {authContext.role} panel.
                   </a>
                 </li> */}
+                {authContext.role === "Nurse" && data && (
+                  <li className="nav-item">
+                    <a className="nav-link alert-page" href="/alerts">
+                      Alerts
+                      <span className="alert-circle">
+                        {data.emergencyAlerts.length}
+                      </span>
+                    </a>
+                  </li>
+                )}
                 <li className="nav-item">
                   <a className="nav-link" href="/" onClick={logout}>
                     Logout

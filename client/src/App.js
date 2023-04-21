@@ -7,6 +7,9 @@ import AuthContext from "./components/context/authContext";
 import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Register from "./components/pages/Register";
+import MedicalCondition from "./components/pages/MedicalCondition";
+import MotivationalTip from "./components/pages/MotivationalTip";
+import Alerts from "./components/pages/Alerts";
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -19,6 +22,11 @@ const cache = new InMemoryCache({
         },
         nurses: {
           // <--- Nurses do not need this because they are not gonna be queried (BE does that (Admin))
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
+        emergencyAlerts: {
           merge(existing, incoming) {
             return incoming;
           },
@@ -80,6 +88,9 @@ function App() {
               <Route path="/" element={<PatientPortal />} />
             )}
             <Route path="/register" element={<Register />} />
+            <Route path="/medical-condition" element={<MedicalCondition />} />
+            <Route path="/motivational-tip" element={<MotivationalTip />} />
+            <Route path="/alerts" element={<Alerts />} />
           </Routes>
         </AuthContext.Provider>
       </ApolloProvider>

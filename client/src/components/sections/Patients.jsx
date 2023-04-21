@@ -12,7 +12,7 @@ import {
 
 export default function Patients() {
   const [patient, setPatient] = useState("");
-  const [patientId, setPatientId] = useState("");
+  const [id, setPatientId] = useState("");
   const [temperature, setTemperature] = useState("");
   const [heartRate, setHeartRate] = useState("");
   const [bloodPressure, setBloodPressure] = useState("");
@@ -21,19 +21,15 @@ export default function Patients() {
 
   const [updatePatient] = useMutation(UPDATE_PATIENT, {
     variables: {
-      patientId,
+      id,
       temperature,
       heartRate,
       bloodPressure,
       weight,
       nurseId,
     },
-    update(cache, { data: { updatePatient } }) {
-      const { patients } = cache.readQuery({ query: GET_PATIENTS });
-      cache.writeQuery({
-        query: GET_PATIENTS,
-        data: { patients: [...patients, updatePatient] },
-      });
+    onCompleted: () => {
+      return alert("Patient was successfully updated");
     },
   });
 
@@ -52,7 +48,7 @@ export default function Patients() {
     if (!temperature || !heartRate || !bloodPressure || !weight || !nurseId) {
       return alert("Please fill in all fields");
     }
-    updatePatient(temperature, heartRate, bloodPressure, weight, nurseId);
+    updatePatient(id, temperature, heartRate, bloodPressure, weight, nurseId);
     setTemperature("");
     setHeartRate("");
     setBloodPressure("");
@@ -162,7 +158,9 @@ export default function Patients() {
                               className="form-control"
                               id="temperature"
                               value={temperature}
-                              onChange={(e) => setTemperature(e.target.value)}
+                              onChange={(e) =>
+                                setTemperature(parseInt(e.target.value))
+                              }
                             />
                           </div>
                           <div className="mb-3">
@@ -172,7 +170,9 @@ export default function Patients() {
                               className="form-control"
                               id="heartRate"
                               value={heartRate}
-                              onChange={(e) => setHeartRate(e.target.value)}
+                              onChange={(e) =>
+                                setHeartRate(parseInt(e.target.value))
+                              }
                             />
                           </div>
                           <div className="mb-3">
@@ -192,7 +192,9 @@ export default function Patients() {
                               className="form-control"
                               id="weight"
                               value={weight}
-                              onChange={(e) => setWeight(e.target.value)}
+                              onChange={(e) =>
+                                setWeight(parseInt(e.target.value))
+                              }
                             />
                           </div>
                           <div className="mb-3">

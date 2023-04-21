@@ -1,5 +1,9 @@
 @use "./mixins.scss" as m;
 
+.navbar-collapse {
+  justify-content: end;
+}
+
 .wrapper {
   width: 100%;
   min-height: max-content;
@@ -84,6 +88,27 @@
   height: 30px;
   object-fit: contain;
   margin-right: 10px;
+}
+
+.alert-page {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  color: var(--danger);
+  font-weight: 500;
+  .alert-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    //margin-left: 10px;
+    background-color: var(--danger);
+    color: #fff;
+    border-radius: 50%;
+  }
 }
 
 //Patient Portal Component

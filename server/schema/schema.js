@@ -28,6 +28,7 @@ const PatientType = new GraphQLObjectType({
     bloodPressure: { type: GraphQLString },
     weight: { type: GraphQLInt },
     motivationalTip: { type: GraphQLString },
+    alertMsg: { type: GraphQLString },
     nurse: {
       type: NurseType,
       resolve(parent, args) {
@@ -217,6 +218,7 @@ const mutation = new GraphQLObjectType({
         bloodPressure: { type: GraphQLNonNull(GraphQLString) },
         weight: { type: GraphQLNonNull(GraphQLInt) },
         motivationalTip: { type: GraphQLNonNull(GraphQLString) },
+        alertMsg: { type: GraphQLString },
         nurseId: { type: GraphQLNonNull(GraphQLID) },
       },
       async resolve(parent, args) {
@@ -238,6 +240,7 @@ const mutation = new GraphQLObjectType({
             bloodPressure: args.bloodPressure,
             weight: args.weight,
             motivationalTip: args.motivationalTip,
+            alertMsg: "",
             nurseId: args.nurseId,
           });
           const result = await patient.save();
@@ -260,6 +263,7 @@ const mutation = new GraphQLObjectType({
         bloodPressure: { type: GraphQLString },
         weight: { type: GraphQLInt },
         motivationalTip: { type: GraphQLString },
+        alertMsg: { type: GraphQLString },
         nurseId: { type: GraphQLID },
       },
       resolve(parent, args, req) {
@@ -278,6 +282,7 @@ const mutation = new GraphQLObjectType({
               bloodPressure: args.bloodPressure,
               weight: args.weight,
               motivationalTip: args.motivationalTip,
+              alertMsg: args.alertMsg,
               nurseId: args.nurseId,
             },
           },

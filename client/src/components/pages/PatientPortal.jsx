@@ -24,12 +24,15 @@ export default function PatientPortal() {
   const [updatePatient] = useMutation(UPDATE_PATIENT, {
     variables: { id, temperature, heartRate, bloodPressure, weight },
     refetchQueries: [{ query: GET_PATIENT, variables: { id: id } }],
+    onCompleted: () => {
+      return alert("Your daily information was successfully updated");
+    },
   });
 
-  if (!updatePatient.loading && !updatePatient.error && submitted) {
-    setSubmitted(false);
-    return alert("Your daily information was successfully updated");
-  }
+  // if (!updatePatient.loading && !updatePatient.error && submitted) {
+  //   setSubmitted(false);
+  //   return alert("Your daily information was successfully updated");
+  // }
 
   const submitHandler = (e) => {
     e.preventDefault();

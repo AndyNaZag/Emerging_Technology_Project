@@ -29,6 +29,9 @@ const PatientSchema = new mongoose.Schema({
   motivationalTip: {
     type: String,
   },
+  alertMsg: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("Patient", PatientSchema);

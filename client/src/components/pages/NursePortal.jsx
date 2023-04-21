@@ -5,9 +5,19 @@ import nursePortal from "../assets/nurse-portal1.png";
 import patientList from "../assets/patient-list.png";
 import Spinner from "../elements/Spinner";
 import { GET_PATIENTS } from "../../queries/patientQueries";
+import { useNavigate } from "react-router-dom";
 
 export default function NursePortal() {
   const { loading, error, data } = useQuery(GET_PATIENTS);
+  const navigate = useNavigate();
+
+  const onMedicalConditionClick = () => {
+    navigate("/medical-condition");
+  };
+
+  const onMotivationalTipClick = () => {
+    navigate("/motivational-tip");
+  };
 
   if (loading) return <Spinner />;
   if (error) return <p>Error: Something went wrong</p>;
@@ -38,15 +48,20 @@ export default function NursePortal() {
             </div>
             <div className="dir-col">
               <div className="dir-col">
-                <div className="dir-col">
+                <button
+                  className="btn btn-warning"
+                  onClick={onMotivationalTipClick}
+                >
                   <h3>Update Daily Motivational Tip</h3>
-                  <p>blablbala</p>
-                </div>
+                </button>
               </div>
               <div className="dir-col">
-                <div className="dir-row">
+                <button
+                  className="btn btn-primary"
+                  onClick={onMedicalConditionClick}
+                >
                   <h3>Generate medical conditions</h3>
-                </div>
+                </button>
               </div>
             </div>
           </div>

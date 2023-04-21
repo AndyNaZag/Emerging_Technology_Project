@@ -10,6 +10,7 @@ const GET_PATIENTS = gql`
       bloodPressure
       weight
       motivationalTip
+      alertMsg
       nurse {
         id
         name
@@ -28,6 +29,7 @@ const GET_PATIENT = gql`
       bloodPressure
       weight
       motivationalTip
+      alertMsg
       nurse {
         id
         name
