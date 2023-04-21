@@ -1,5 +1,5 @@
+ 
 import React from "react";
-
 const Alerts = () => (
     <section className="wrapper wp-bgw">
     <div className="patient-portal-content">
@@ -13,3 +13,4 @@ const Alerts = () => (
 );
 
 export default Alerts;
+

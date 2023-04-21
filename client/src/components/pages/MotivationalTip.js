@@ -7,7 +7,7 @@ const MotivationalTip = () => (
       <div className="dir-col center">
         <h3>Update Daily Motivational Tip</h3>
         <div className="motivational-tip">
-          <p className="white">blablabla</p>
+          <p className="white">It Is Health That Is Real Wealth And Not Pieces Of Gold And Silver.</p>
         </div>
       </div>
     </div>

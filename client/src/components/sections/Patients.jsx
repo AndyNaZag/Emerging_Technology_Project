@@ -10,6 +10,8 @@ import {
   UPDATE_PATIENT,
 } from "../../mutations/patientMutations";
 
+
+
 export default function Patients() {
   const [patient, setPatient] = useState("");
   const [patientId, setPatientId] = useState("");
@@ -66,7 +68,7 @@ export default function Patients() {
         nurseId,
       },
     });
-      
+
     setTemperature("");
     setHeartRate("");
     setBloodPressure("");
@@ -95,6 +97,8 @@ export default function Patients() {
 
   return (
     <>
+
+
       {!patients.loading && !patients.error && (
         <>
           <table className="table table-hover mt-3">
@@ -247,3 +251,5 @@ export default function Patients() {
     </>
   );
 }
+
+
