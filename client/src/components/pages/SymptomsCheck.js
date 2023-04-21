@@ -1,6 +1,6 @@
 import "../styles/components.scss";
 import { useQuery, useMutation } from "@apollo/client";
-import { useState, useContext } from "react";
+import { useState, useContext,useEffect } from "react";
 import AuthContext from "../context/authContext";
 import patientPortal from "../assets/patient-portal.png";
 import Spinner from "../elements/Spinner";
@@ -58,6 +58,24 @@ export default function SymptomsCheck() {
       ],
     });
   };
+  useEffect(() => {
+    if (!loading)
+    {
+      setFever(data.patient.fever);
+      setCough(data.patient.cough);
+      setShortnessOfBreath(data.patient.shortnessOfBreath);
+      setFatigue(data.patient.fatigue);
+      setBodyAches(data.patient.bodyAches);
+      setHeadache(data.patient.headache);
+      setLossOfTaste(data.patient.lossOfTaste);
+      setLossOfSmell(data.patient.lossOfSmell);
+      setSoreThroat(data.patient.soreThroat);
+      setCongestion(data.patient.congestion);
+      setNausea(data.patient.nausea);
+      setDiarrhea(data.patient.diarrhea);
+    }
+
+  }, [loading]);
 
   if (loading) return <Spinner />;
   if (error) return <AlertMessage message={error.message} />;
@@ -70,11 +88,11 @@ export default function SymptomsCheck() {
             <div className="card-body p-5">
               <h2 className="text-center mb-4">Patient Symptoms</h2>
               <img
-  src={patientPortal}
-  alt="Patient Portal"
-  className="img-fluid d-block mx-auto mb-4"
-  style={{ width: '128px', height: '128px' }}
-/>
+                src={patientPortal}
+                alt="Patient Portal"
+                className="img-fluid d-block mx-auto mb-4"
+                style={{ width: '128px', height: '128px' }}
+              />
 
               <form onSubmit={handleFormSubmit}>
                 <div className="form-group form-check">
@@ -153,87 +171,87 @@ export default function SymptomsCheck() {
                   </label>
                 </div>
                 <div className="form-group form-check">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id="lossOfTaste"
-                checked={lossOfTaste}
-                onChange={(e) => setLossOfTaste(e.target.checked)}
-              />
-              <label className="form-check-label" htmlFor="lossOfTaste">
-                Loss of Taste
-              </label>
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    id="lossOfTaste"
+                    checked={lossOfTaste}
+                    onChange={(e) => setLossOfTaste(e.target.checked)}
+                  />
+                  <label className="form-check-label" htmlFor="lossOfTaste">
+                    Loss of Taste
+                  </label>
+                </div>
+                <div className="form-group form-check">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    id="lossOfSmell"
+                    checked={lossOfSmell}
+                    onChange={(e) => setLossOfSmell(e.target.checked)}
+                  />
+                  <label className="form-check-label" htmlFor="lossOfSmell">
+                    Loss of Smell
+                  </label>
+                </div>
+                <div className="form-group form-check">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    id="soreThroat"
+                    checked={soreThroat}
+                    onChange={(e) => setSoreThroat(e.target.checked)}
+                  />
+                  <label className="form-check-label" htmlFor="soreThroat">
+                    Sore Throat
+                  </label>
+                </div>
+                <div className="form-group form-check">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    id="congestion"
+                    checked={congestion}
+                    onChange={(e) => setCongestion(e.target.checked)}
+                  />
+                  <label className="form-check-label" htmlFor="congestion">
+                    Congestion
+                  </label>
+                </div>
+                <div className="form-group form-check">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    id="nausea"
+                    checked={nausea}
+                    onChange={(e) => setNausea(e.target.checked)}
+                  />
+                  <label className="form-check-label" htmlFor="nausea">
+                    Nausea or Vomiting
+                  </label>
+                </div>
+                <div className="form-group form-check">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    id="diarrhea"
+                    checked={diarrhea}
+                    onChange={(e) => setDiarrhea(e.target.checked)}
+                  />
+                  <label className="form-check-label" htmlFor="diarrhea">
+                    Diarrhea
+                  </label>
+                </div>
+                {updateLoading && <Spinner />}
+                {updateError && <AlertMessage message={updateError.message} />}
+                <button type="submit" className="btn btn-primary mt-3">
+                  Save
+                </button>
+              </form>
             </div>
-            <div className="form-group form-check">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id="lossOfSmell"
-                checked={lossOfSmell}
-                onChange={(e) => setLossOfSmell(e.target.checked)}
-              />
-              <label className="form-check-label" htmlFor="lossOfSmell">
-                Loss of Smell
-              </label>
-            </div>
-            <div className="form-group form-check">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id="soreThroat"
-                checked={soreThroat}
-                onChange={(e) => setSoreThroat(e.target.checked)}
-              />
-              <label className="form-check-label" htmlFor="soreThroat">
-                Sore Throat
-              </label>
-            </div>
-            <div className="form-group form-check">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id="congestion"
-                checked={congestion}
-                onChange={(e) => setCongestion(e.target.checked)}
-              />
-              <label className="form-check-label" htmlFor="congestion">
-                Congestion
-              </label>
-            </div>
-            <div className="form-group form-check">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id="nausea"
-                checked={nausea}
-                onChange={(e) => setNausea(e.target.checked)}
-              />
-              <label className="form-check-label" htmlFor="nausea">
-                Nausea or Vomiting
-              </label>
-            </div>
-            <div className="form-group form-check">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id="diarrhea"
-                checked={diarrhea}
-                onChange={(e) => setDiarrhea(e.target.checked)}
-              />
-              <label className="form-check-label" htmlFor="diarrhea">
-                Diarrhea
-              </label>
-            </div>
-            {updateLoading && <Spinner />}
-            {updateError && <AlertMessage message={updateError.message} />}
-            <button type="submit" className="btn btn-primary mt-3">
-              Save
-            </button>
-          </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-);
+  );
 }
