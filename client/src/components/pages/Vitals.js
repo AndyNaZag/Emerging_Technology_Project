@@ -7,6 +7,7 @@ import Spinner from "../elements/Spinner";
 import { GET_PATIENT } from "../../queries/patientQueries";
 import AlertMessage from "../sections/alertMessage";
 import { UPDATE_PATIENT } from "../../mutations/patientMutations";
+import { gql } from "@apollo/client";
 
 export default function Vitals() {
   const authContext = useContext(AuthContext);
@@ -17,8 +18,6 @@ export default function Vitals() {
   const [temperature, setTemperature] = useState(0);
   const [heartRate, setHeartRate] = useState(0);
   const [bloodPressure, setBloodPressure] = useState("");
-  const [oxygenLevel, setOxygenLevel] = useState(0);
-  const [height, setHeight] = useState(0);
   const [weight, setWeight] = useState(0);
   const [updatePatient, { loading: updateLoading, error: updateError }] = useMutation(
     UPDATE_PATIENT
@@ -29,14 +28,10 @@ export default function Vitals() {
     updatePatient({
       variables: {
         id: id,
-        vitalInput: {
-          temperature: Number(temperature),
-          heartRate: Number(heartRate),
-          bloodPressure: bloodPressure,
-          oxygenLevel: Number(oxygenLevel),
-          height: Number(height),
-          weight: Number(weight),
-        },
+        temperature: Number(temperature),
+        heartRate: Number(heartRate),
+        bloodPressure: bloodPressure,
+        weight: Number(weight),
       },
       refetchQueries: [
         {
@@ -59,9 +54,11 @@ export default function Vitals() {
               <h2 className="text-center mb-4">Patient Vitals</h2>
               <img
                 src={patientPortal}
-                alt="Patient Portal"
+                alt="Patient Vitals"
                 className="img-fluid d-block mx-auto mb-4"
+                style={{ width: "128px", height: "128px" }}
               />
+
               <form onSubmit={handleFormSubmit}>
                 <div className="form-group">
                   <label htmlFor="temperature">Temperature (°F)</label>
@@ -97,26 +94,29 @@ export default function Vitals() {
                   />
                 </div>
                 <div className="form-group">
-                <label htmlFor="weight">Weight (Kg):</label>
-                <input
-                  type="text"
-                  id="weight"
-                  placeholder="Enter weight ing Kg"
-                  className="form-control"
-                  value={weight}
-                  onChange={(e) => setWeight(parseInt(e.target.value))}
-                />
-              </div>
-  <div className="text-center">
-    <button type="submit" className="btn btn-primary">
-      Save
-    </button>
-  </div>
-</form>
-</div>
-</div>
-</div>
-</div>
-</div>
-);
-} 
+                  <label htmlFor="weight">Weight (Kg)</label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    id="weight"
+                    placeholder="Enter weight"
+                    value={weight}
+                    onChange={(e) => setWeight(e.target.value)}
+                    />
+                    </div>
+                      <button type="submit" className="btn btn-primary btn-block mt-4">
+                                  {updateLoading ? (
+                                    <Spinner color="text-light" size="sm" />
+                                  ) : (
+                                    "Save Vitals"
+                                  )}
+                                </button>
+                                {updateError && <AlertMessage message={updateError.message} />}
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    );
+                    }

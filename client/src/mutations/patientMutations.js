@@ -9,7 +9,6 @@ const CREATE_PATIENT = gql`
     $heartRate: Int!
     $bloodPressure: String!
     $weight: Int!
-    $motivationalTip: String!
     $nurseId: ID!
   ) {
     createPatient(
@@ -20,7 +19,6 @@ const CREATE_PATIENT = gql`
       heartRate: $heartRate
       bloodPressure: $bloodPressure
       weight: $weight
-      motivationalTip: $motivationalTip
       nurseId: $nurseId
     ) {
       id
@@ -31,7 +29,6 @@ const CREATE_PATIENT = gql`
       heartRate
       bloodPressure
       weight
-      motivationalTip
       nurse {
         id
         name
@@ -48,7 +45,6 @@ const UPDATE_PATIENT = gql`
     $heartRate: Int
     $bloodPressure: String
     $weight: Int
-    $motivationalTip: String
     $nurseId: ID
   ) {
     updatePatient(
@@ -58,7 +54,6 @@ const UPDATE_PATIENT = gql`
       heartRate: $heartRate
       bloodPressure: $bloodPressure
       weight: $weight
-      motivationalTip: $motivationalTip
       nurseId: $nurseId
     ) {
       id

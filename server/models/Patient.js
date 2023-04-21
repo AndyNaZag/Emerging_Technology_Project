@@ -26,9 +26,7 @@ const PatientSchema = new mongoose.Schema({
   weight: {
     type: Number,
   },
-  motivationalTip: {
-    type: String,
-  },
+ 
 });
 
 module.exports = mongoose.model("Patient", PatientSchema);

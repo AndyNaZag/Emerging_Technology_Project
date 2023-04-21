@@ -70,10 +70,12 @@ export default function SymptomsCheck() {
             <div className="card-body p-5">
               <h2 className="text-center mb-4">Patient Symptoms</h2>
               <img
-                src={patientPortal}
-                alt="Patient Portal"
-                className="img-fluid d-block mx-auto mb-4"
-              />
+  src={patientPortal}
+  alt="Patient Portal"
+  className="img-fluid d-block mx-auto mb-4"
+  style={{ width: '128px', height: '128px' }}
+/>
+
               <form onSubmit={handleFormSubmit}>
                 <div className="form-group form-check">
                   <input

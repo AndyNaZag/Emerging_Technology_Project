@@ -4,7 +4,6 @@ import { useContext } from "react";
 
 export default function Header() {
   const authContext = useContext(AuthContext);
-  console.log(authContext);
 
   const logout = () => {
     authContext.logout();
@@ -34,11 +33,46 @@ export default function Header() {
           {authContext.token && (
             <>
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                {/* <li className="nav-item">
-                  <a className="nav-link" href="/">
-                    Hi, Welcome to the {authContext.role} panel.
-                  </a>
-                </li> */}
+                {authContext.role === "Patient" && (
+                  <>
+                    <li className="nav-item">
+                      <a className="nav-link" href="/symptoms-check">
+                        Symptoms Check
+                      </a>
+                    </li>
+                    <li className="nav-item">
+                      <a className="nav-link" href="/motivation-tip">
+                        Motivation Tip
+                      </a>
+                    </li>
+                    <li className="nav-item">
+                      <a className="nav-link" href="/vitals">
+                        Vitals
+                      </a>
+                    </li>
+                  </>
+                )}
+                {authContext.role === "Nurse" && (
+                  <>
+                    <li className="nav-item">
+                      <a className="nav-link" href="/patients-list">
+                        Patients List
+                      </a>
+                    </li>
+                    <li className="nav-item">
+                      <a className="nav-link" href="/motivational-tip">
+                        Motivational Tips
+                      </a>
+                    </li>
+                    <li className="nav-item">
+                      <a className="nav-link" href="/alerts">
+                        Alerts
+                      </a>
+                    </li>
+                  </>
+                )}
+              </ul>
+              <ul className="navbar-nav mb-2 mb-lg-0">
                 <li className="nav-item">
                   <a className="nav-link" href="/" onClick={logout}>
                     Logout

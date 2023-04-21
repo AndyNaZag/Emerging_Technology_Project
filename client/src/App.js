@@ -7,6 +7,12 @@ import AuthContext from "./components/context/authContext";
 import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Register from "./components/pages/Register";
+import MotivationTip from "./components/pages/MotivationTip";
+import SymptomsCheck from "./components/pages/SymptomsCheck";
+import Vitals from "./components/pages/Vitals";
+import MotivationalTip from "./components/pages/MotivationalTip";
+import PatientsList from "./components/pages/PatientsList";
+import Alerts from "./components/pages/Alerts";
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -80,6 +86,12 @@ function App() {
               <Route path="/" element={<PatientPortal />} />
             )}
             <Route path="/register" element={<Register />} />
+            <Route path="/vitals" element={<Vitals />} />
+          <Route path="/motivation-tip" element={<MotivationTip />} />
+          <Route path="/symptoms-check" element={<SymptomsCheck />} />
+          <Route path="/patients-list" element={<PatientsList />} />
+          <Route path="/motivational-tip" element={<MotivationalTip />} />
+          <Route path="/alerts" element={<Alerts />} />
           </Routes>
         </AuthContext.Provider>
       </ApolloProvider>

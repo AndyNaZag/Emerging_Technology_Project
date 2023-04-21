@@ -9,15 +9,14 @@ const GET_NURSES = gql`
     }
   }
 `;
-
-const GET_CURRENT_NURSE = gql`
-  query GetCurrentNurse {
-    currentNurse {
+const GET_SINGLE_NURSE = gql`
+  query GetSingleNurse($nurseId: ID!) {
+    nurse(id: $nurseId) {
       id
       name
       username
     }
   }
-`;
+  `;
 
-export { GET_NURSES, GET_CURRENT_NURSE };
+export { GET_NURSES, GET_SINGLE_NURSE };

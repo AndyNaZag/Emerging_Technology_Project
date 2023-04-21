@@ -20,7 +20,10 @@ export default function MotivationTip() {
       <div className="patient-portal-content">
         <div className="dir-col center">
           <div className="dir-row">
-            <img src={motivation} alt="Motivational Tip" className="mr-2" />
+          <img src={motivation} alt="Motivation Tip"className="img-fluid d-block mx-auto mb-4"
+  style={{ width: '128px', height: '128px' }}
+/>
+
           </div>
           <div className="dir-col">
             <h6>Never forget:</h6>

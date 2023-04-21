@@ -28,13 +28,17 @@ export default function Patients() {
       weight,
       nurseId,
     },
-    update(cache, { data: { updatePatient } }) {
-      const { patients } = cache.readQuery({ query: GET_PATIENTS });
-      cache.writeQuery({
-        query: GET_PATIENTS,
-        data: { patients: [...patients, updatePatient] },
-      });
-    },
+   update(cache, { data: { updatePatient } }) {
+  const { patients } = cache.readQuery({ query: GET_PATIENTS });
+  const index = patients.findIndex((p) => p.id === updatePatient.id);
+  const newPatients = [...patients];
+  newPatients[index] = updatePatient;
+  cache.writeQuery({
+    query: GET_PATIENTS,
+    data: { patients: newPatients },
+  });
+},
+
   });
 
   const onPatientClick = (patient) => {
@@ -52,7 +56,17 @@ export default function Patients() {
     if (!temperature || !heartRate || !bloodPressure || !weight || !nurseId) {
       return alert("Please fill in all fields");
     }
-    updatePatient(temperature, heartRate, bloodPressure, weight, nurseId);
+    updatePatient({
+      variables: {
+        patientId,
+        temperature,
+        heartRate,
+        bloodPressure,
+        weight,
+        nurseId,
+      },
+    });
+      
     setTemperature("");
     setHeartRate("");
     setBloodPressure("");

@@ -27,7 +27,7 @@ const PatientType = new GraphQLObjectType({
     heartRate: { type: GraphQLInt },
     bloodPressure: { type: GraphQLString },
     weight: { type: GraphQLInt },
-    motivationalTip: { type: GraphQLString },
+   // motivationalTip: { type: GraphQLString },
     nurse: {
       type: NurseType,
       resolve(parent, args) {
@@ -64,6 +64,7 @@ const EmergencyAlertType = new GraphQLObjectType({
 });
 
 //Auth Data Type
+//Auth Data Type
 const AuthData = new GraphQLObjectType({
   name: "AuthData",
   fields: () => ({
@@ -71,8 +72,10 @@ const AuthData = new GraphQLObjectType({
     userId: { type: GraphQLID },
     token: { type: GraphQLString },
     tokenExpiration: { type: GraphQLInt },
+    nurseName: { type: GraphQLString },
   }),
 });
+
 
 //QUERIES
 const RootQuery = new GraphQLObjectType({
@@ -104,6 +107,14 @@ const RootQuery = new GraphQLObjectType({
         return Nurse.findById(args.id);
       },
     },
+      // new field for retrieving a single nurse data by ID
+      singleNurse: {
+        type: NurseType,
+        args: { id: { type: GraphQLID } },
+        resolve(parent, args) {
+          return Nurse.findById(args.id);
+        },
+      },
     emergencyAlerts: {
       type: new GraphQLList(EmergencyAlertType),
       resolve(parent, args) {
@@ -117,55 +128,66 @@ const RootQuery = new GraphQLObjectType({
 const mutation = new GraphQLObjectType({
   name: "Mutation",
   fields: {
-    //Login
-    login: {
-      type: AuthData,
-      args: {
-        role: {
-          type: new GraphQLEnumType({
-            name: "Role",
-            values: {
-              NURSE: { value: "Nurse" },
-              PATIENT: { value: "Patient" },
-            },
-          }),
+   //Login
+login: {
+  type: AuthData,
+  args: {
+    role: {
+      type: new GraphQLEnumType({
+        name: "Role",
+        values: {
+          NURSE: { value: "Nurse" },
+          PATIENT: { value: "Patient" },
         },
-        username: { type: GraphQLString },
-        password: { type: GraphQLString },
-      },
-      async resolve(parent, args) {
-        let user;
-        if (args.role === "Patient") {
-          user = await Patient.findOne({ username: args.username });
-        } else if (args.role === "Nurse") {
-          user = await Nurse.findOne({ username: args.username });
-        }
-        if (!user) {
-          throw new Error("User does not exist!");
-        }
-        const isEqual = await bcrypt.compare(args.password, user.password);
-        if (!isEqual) {
-          throw new Error("Password is incorrect!");
-        }
-        const token = jwt.sign(
-          {
-            userId: user.id,
-            username: user.username,
-            role: args.role,
-          },
-          "somesupersecretkey",
-          {
-            expiresIn: "1h",
-          }
-        );
-        return {
-          role: args.role,
-          userId: user.id,
-          token: token,
-          tokenExpiration: 1,
-        };
-      },
+      }),
     },
+    username: { type: GraphQLString },
+    password: { type: GraphQLString },
+  },
+  async resolve(parent, args) {
+    let user;
+    if (args.role === "Patient") {
+      user = await Patient.findOne({ username: args.username });
+    } else if (args.role === "Nurse") {
+      user = await Nurse.findOne({ username: args.username });
+    }
+    if (!user) {
+      throw new Error("User does not exist!");
+    }
+    const isEqual = await bcrypt.compare(args.password, user.password);
+    if (!isEqual) {
+      throw new Error("Password is incorrect!");
+    }
+    const token = jwt.sign(
+      {
+        userId: user.id,
+        username: user.username,
+        role: args.role,
+      },
+      "somesupersecretkey",
+      {
+        expiresIn: "1h",
+      }
+    );
+    if (args.role === "Nurse") {
+      const nurse = await Nurse.findById(user.id);
+      return {
+        role: args.role,
+        userId: user.id,
+        token: token,
+        tokenExpiration: 1,
+        nurseName: nurse.name,
+      };
+    }
+    return {
+      role: args.role,
+      userId: user.id,
+      token: token,
+      tokenExpiration: 1,
+    };
+  },
+},
+
     //Create a Nurse
     createNurse: {
       type: NurseType,
@@ -227,8 +249,8 @@ const mutation = new GraphQLObjectType({
       GraphQLNonNull(GraphQLString) },
         weight: { type: new 
       GraphQLNonNull(GraphQLInt) },
-        motivationalTip: { type: new 
-      GraphQLNonNull(GraphQLString) },
+      //  motivationalTip: { type: new 
+     // GraphQLNonNull(GraphQLString) },
         nurseId: { type: new 
       GraphQLNonNull(GraphQLID) },
       },
@@ -250,7 +272,7 @@ const mutation = new GraphQLObjectType({
             heartRate: args.heartRate,
             bloodPressure: args.bloodPressure,
             weight: args.weight,
-            motivationalTip: args.motivationalTip,
+         //   motivationalTip: args.motivationalTip,
             nurseId: args.nurseId,
           });
           const result = await patient.save();
@@ -273,7 +295,7 @@ const mutation = new GraphQLObjectType({
         heartRate: { type: GraphQLInt },
         bloodPressure: { type: GraphQLString },
         weight: { type: GraphQLInt },
-        motivationalTip: { type: GraphQLString },
+      //  motivationalTip: { type: GraphQLString },
         nurseId: { type: GraphQLID },
       },
       resolve(parent, args, req) {
@@ -291,7 +313,7 @@ const mutation = new GraphQLObjectType({
               heartRate: args.heartRate,
               bloodPressure: args.bloodPressure,
               weight: args.weight,
-              motivationalTip: args.motivationalTip,
+            // motivationalTip: args.motivationalTip,
               nurseId: args.nurseId,
             },
           },
