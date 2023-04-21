@@ -1,6 +1,6 @@
 import "../styles/components.scss";
 import { useQuery, useMutation } from "@apollo/client";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect  } from "react";
 import AuthContext from "../context/authContext";
 import patientPortal from "../assets/patient-portal.png";
 import Spinner from "../elements/Spinner";
@@ -42,8 +42,20 @@ export default function Vitals() {
     });
   };
 
+  useEffect(() => {
+    if (!loading)
+    {
+      setTemperature(data.patient.temperature);
+      setHeartRate(data.patient.heartRate);
+      setBloodPressure(data.patient.bloodPressure);
+      setWeight(data.patient.weight);
+    }
+
+  }, [loading]);
+
   if (loading) return <Spinner />;
   if (error) return <AlertMessage message={error.message} />;
+
 
   return (
     <div className="container">
