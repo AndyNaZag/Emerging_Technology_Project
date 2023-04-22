@@ -5,6 +5,7 @@ import { useMutation } from "@apollo/client";
 import { LOGIN } from "../../mutations/authMutations";
 import { useState, useContext } from "react";
 import AuthContext from "../context/authContext";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const [role, setRole] = useState("PATIENT");
@@ -82,7 +83,7 @@ export default function Login() {
           </div>
           <div className="form-actions">
             <p>
-              Not registered yet? <a href="/register">Register here</a>
+              Not registered yet? <Link to="/register">Register here</Link>
             </p>
             <button type="submit" className="btn btn-primary">
               LogIn
