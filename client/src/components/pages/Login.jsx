@@ -12,8 +12,11 @@ export default function Login() {
   const [login] = useMutation(LOGIN, {
     variables: { role, username, password },
     onCompleted: (data) => {
-      console.log(data);
       authContext.login(data.login.token, data.login.role, data.login.userId);
+    },
+    onError: (err) => {
+      console.log(err);
+      alert(`Error: ${err.message}`);
     },
   });
 

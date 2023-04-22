@@ -9,6 +9,7 @@ const {
   GraphQLID,
   GraphQLString,
   GraphQLInt,
+  GraphQLBoolean,
   GraphQLEnumType,
   GraphQLSchema,
   GraphQLList,
@@ -23,12 +24,18 @@ const PatientType = new GraphQLObjectType({
     name: { type: GraphQLString },
     username: { type: GraphQLString },
     password: { type: GraphQLString },
+    gender: { type: GraphQLString },
+    age: { type: GraphQLInt },
     temperature: { type: GraphQLInt },
     heartRate: { type: GraphQLInt },
     bloodPressure: { type: GraphQLString },
     weight: { type: GraphQLInt },
     motivationalTip: { type: GraphQLString },
     alertMsg: { type: GraphQLString },
+    fever: { type: GraphQLBoolean },
+    chestPain: { type: GraphQLBoolean },
+    difficultyBreathing: { type: GraphQLBoolean },
+    symptoms: { type: GraphQLString },
     nurse: {
       type: NurseType,
       resolve(parent, args) {
@@ -213,6 +220,8 @@ const mutation = new GraphQLObjectType({
         name: { type: GraphQLNonNull(GraphQLString) }, //The name cannot be null
         username: { type: GraphQLNonNull(GraphQLString) },
         password: { type: GraphQLNonNull(GraphQLString) },
+        gender: { type: GraphQLNonNull(GraphQLString) },
+        age: { type: GraphQLNonNull(GraphQLInt) },
         temperature: { type: GraphQLNonNull(GraphQLInt) },
         heartRate: { type: GraphQLNonNull(GraphQLInt) },
         bloodPressure: { type: GraphQLNonNull(GraphQLString) },
@@ -220,6 +229,10 @@ const mutation = new GraphQLObjectType({
         motivationalTip: { type: GraphQLNonNull(GraphQLString) },
         alertMsg: { type: GraphQLString },
         nurseId: { type: GraphQLNonNull(GraphQLID) },
+        fever: { type: GraphQLBoolean },
+        chestPain: { type: GraphQLBoolean },
+        difficultyBreathing: { type: GraphQLBoolean },
+        symptoms: { type: GraphQLString },
       },
       async resolve(parent, args) {
         try {
@@ -235,6 +248,8 @@ const mutation = new GraphQLObjectType({
             name: args.name,
             username: args.username,
             password: hashedPassword,
+            gender: args.gender,
+            age: args.age,
             temperature: args.temperature,
             heartRate: args.heartRate,
             bloodPressure: args.bloodPressure,
@@ -242,6 +257,10 @@ const mutation = new GraphQLObjectType({
             motivationalTip: args.motivationalTip,
             alertMsg: "",
             nurseId: args.nurseId,
+            fever: false,
+            chestPain: false,
+            difficultyBreathing: false,
+            symptoms: "",
           });
           const result = await patient.save();
           return { ...result._doc, password: null, _id: result.id };
@@ -258,6 +277,8 @@ const mutation = new GraphQLObjectType({
         name: { type: GraphQLString },
         username: { type: GraphQLString },
         password: { type: GraphQLString },
+        gender: { type: GraphQLString },
+        age: { type: GraphQLInt },
         temperature: { type: GraphQLInt },
         heartRate: { type: GraphQLInt },
         bloodPressure: { type: GraphQLString },
@@ -265,6 +286,10 @@ const mutation = new GraphQLObjectType({
         motivationalTip: { type: GraphQLString },
         alertMsg: { type: GraphQLString },
         nurseId: { type: GraphQLID },
+        fever: { type: GraphQLBoolean },
+        chestPain: { type: GraphQLBoolean },
+        difficultyBreathing: { type: GraphQLBoolean },
+        symptoms: { type: GraphQLString },
       },
       resolve(parent, args, req) {
         // if (!req.isAuth) {
@@ -277,6 +302,8 @@ const mutation = new GraphQLObjectType({
               name: args.name,
               username: args.username,
               password: args.password,
+              gender: args.gender,
+              age: args.age,
               temperature: args.temperature,
               heartRate: args.heartRate,
               bloodPressure: args.bloodPressure,
@@ -284,6 +311,10 @@ const mutation = new GraphQLObjectType({
               motivationalTip: args.motivationalTip,
               alertMsg: args.alertMsg,
               nurseId: args.nurseId,
+              fever: args.fever,
+              chestPain: args.chestPain,
+              difficultyBreathing: args.difficultyBreathing,
+              symptoms: args.symptoms,
             },
           },
           { new: true }

@@ -1,5 +1,5 @@
 import "../styles/components.scss";
-import nursePortal from "../assets/nurse-portal1.png";
+import folder from "../assets/folder.png";
 import * as tf from "@tensorflow/tfjs";
 import * as qna from "@tensorflow-models/qna";
 import { useEffect, useState, useRef } from "react";
@@ -67,7 +67,7 @@ export default function MedicalCondition() {
         <div className="dir-col center">
           <div className="dir-row">
             <img
-              src={nursePortal}
+              src={folder}
               alt="Patient List Logo"
               className="mr-2 logo-big"
             />
@@ -85,7 +85,7 @@ export default function MedicalCondition() {
             ) : (
               <Fragment>
                 <section className="wrapper wp-bgw">
-                  <div className="dir-col">
+                  <div className="dir-col medical-condition">
                     <h5>Write the symptoms:</h5>
                     <input
                       ref={questionRef}
@@ -95,7 +95,7 @@ export default function MedicalCondition() {
                       className="form-control"
                     ></input>
                     <div className="dir-col">
-                      <h5>Possible Medical Conditions:</h5>
+                      {answer && <h5>Possible Medical Conditions:</h5>}
                       {answer
                         ? answer.map((ans, idx) => (
                             <div className="answer" key={idx}>
@@ -109,7 +109,7 @@ export default function MedicalCondition() {
                     </div>
                   </div>
                   {answer && (
-                    <div className="dir-col">
+                    <form className="dir-col medical-condition-form">
                       <h5>Alert Patient to visit a doctor?</h5>
                       <div className="mb-3">
                         <label className="form-label">Select Patient</label>
@@ -145,7 +145,7 @@ export default function MedicalCondition() {
                       >
                         Alert
                       </button>
-                    </div>
+                    </form>
                   )}
                 </section>
               </Fragment>

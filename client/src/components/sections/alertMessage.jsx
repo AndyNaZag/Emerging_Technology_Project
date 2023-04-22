@@ -33,9 +33,9 @@ export default function AlertMessage({ id }) {
           />
           <h5>SEND EMERGENCY ALERT</h5>
           <p className="op-s">
-            Create and send an emergency alert to first responders. <br /> A
-            nurse will contact you as soon as we receive your message, we work
-            24/7 because your health is our priority.
+            Create and send an emergency alert to first responders. A nurse will
+            contact you as soon as we receive your message, we work 24/7 because
+            your health is our priority.
           </p>
         </button>
       </div>

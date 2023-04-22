@@ -87,21 +87,23 @@ export default function Patients() {
                 <th>Heart Rate</th>
                 <th>Blood Pressure</th>
                 <th>Weight</th>
+                <th>Signs</th>
+                <th>Symptoms</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
               {patients.data.patients.map((patient) => (
-                <tr
-                  className="patient-row"
-                  data-bs-toggle="modal"
-                  data-bs-target="#updatePatientModal"
-                  key={patient.id}
-                  onClick={() => {
-                    onPatientClick(patient);
-                  }}
-                >
-                  <td>
+                <tr className="patient-row">
+                  <td
+                    className="patient-name"
+                    data-bs-toggle="modal"
+                    data-bs-target="#updatePatientModal"
+                    key={patient.id}
+                    onClick={() => {
+                      onPatientClick(patient);
+                    }}
+                  >
                     <FaUser className="icon" />
                     {patient.name}
                   </td>
@@ -109,6 +111,14 @@ export default function Patients() {
                   <td>{patient.heartRate}</td>
                   <td>{patient.bloodPressure}</td>
                   <td>{patient.weight}</td>
+                  <td>
+                    {patient.fever && <li>Fever</li>}
+                    {patient.chestPain && <li>Severe Chest Pain</li>}
+                    {patient.difficultyBreathing && (
+                      <li>Difficulty Breathing</li>
+                    )}
+                  </td>
+                  <td>{patient.symptoms}</td>
                   <td>
                     <button
                       className="btn btn-danger btn-sm"

@@ -10,6 +10,12 @@ const PatientSchema = new mongoose.Schema({
   password: {
     type: String,
   },
+  gender: {
+    type: String,
+  },
+  age: {
+    type: Number,
+  },
   nurseId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Nurse",
@@ -30,6 +36,18 @@ const PatientSchema = new mongoose.Schema({
     type: String,
   },
   alertMsg: {
+    type: String,
+  },
+  fever: {
+    type: Boolean,
+  },
+  chestPain: {
+    type: Boolean,
+  },
+  difficultyBreathing: {
+    type: Boolean,
+  },
+  symptoms: {
     type: String,
   },
 });

@@ -5,12 +5,18 @@ const GET_PATIENTS = gql`
     patients {
       id
       name
+      gender
+      age
       temperature
       heartRate
       bloodPressure
       weight
       motivationalTip
       alertMsg
+      fever
+      chestPain
+      difficultyBreathing
+      symptoms
       nurse {
         id
         name
@@ -24,12 +30,18 @@ const GET_PATIENT = gql`
     patient(id: $id) {
       id
       name
+      gender
+      age
       temperature
       heartRate
       bloodPressure
       weight
       motivationalTip
       alertMsg
+      fever
+      chestPain
+      difficultyBreathing
+      symptoms
       nurse {
         id
         name

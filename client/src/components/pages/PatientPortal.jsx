@@ -8,6 +8,7 @@ import Spinner from "../elements/Spinner";
 import { GET_PATIENT } from "../../queries/patientQueries";
 import AlertMessage from "../sections/alertMessage";
 import { UPDATE_PATIENT } from "../../mutations/patientMutations";
+import Checklist from "../sections/checklist";
 
 export default function PatientPortal() {
   const authContext = useContext(AuthContext);
@@ -28,11 +29,6 @@ export default function PatientPortal() {
       return alert("Your daily information was successfully updated");
     },
   });
-
-  // if (!updatePatient.loading && !updatePatient.error && submitted) {
-  //   setSubmitted(false);
-  //   return alert("Your daily information was successfully updated");
-  // }
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -79,8 +75,7 @@ export default function PatientPortal() {
                 <h3>Hi, {data.patient.name}!</h3>
               </div>
               <div className="dir-col">
-                <h6>Never forget:</h6>
-                <p>"{data.patient.motivationalTip}".</p>
+                <h6>"{data.patient.motivationalTip}."</h6>
               </div>
             </div>
           </div>
@@ -88,62 +83,62 @@ export default function PatientPortal() {
             <form action="" className="form dir-col" onSubmit={submitHandler}>
               <h3>DAILY INFORMATION</h3>
               <p>Submit your daily information.</p>
-              <div className="form-group">
-                <label htmlFor="temperature">Temperature (°C):</label>
-                <input
-                  type="number"
-                  id="temperature"
-                  placeholder="Enter temperature in Celsius"
-                  className="form-control"
-                  value={temperature}
-                  onChange={(e) => setTemperature(parseInt(e.target.value))}
-                />
+              <div className="dir-col fields">
+                <div className="form-group">
+                  <label htmlFor="temperature">Temperature (°C):</label>
+                  <input
+                    type="number"
+                    id="temperature"
+                    placeholder="Enter temperature in Celsius"
+                    className="form-control"
+                    value={temperature}
+                    onChange={(e) => setTemperature(parseInt(e.target.value))}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="heartRate">Heart Rate:</label>
+                  <input
+                    type="number"
+                    id="heartRate"
+                    placeholder="Enter heart rate"
+                    className="form-control"
+                    value={heartRate}
+                    onChange={(e) => setHeartRate(parseInt(e.target.value))}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="bloodPressure">Blood Pressure:</label>
+                  <input
+                    type="text"
+                    id="bloodPressure"
+                    placeholder="Enter blood pressure"
+                    className="form-control"
+                    value={bloodPressure}
+                    onChange={(e) => setBloodPressure(e.target.value)}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="weight">Weight (Kg):</label>
+                  <input
+                    type="text"
+                    id="weight"
+                    placeholder="Enter weight ing Kg"
+                    className="form-control"
+                    value={weight}
+                    onChange={(e) => setWeight(parseInt(e.target.value))}
+                  />
+                </div>
+                <button type="submit" className="btn btn-primary">
+                  Submit
+                </button>
               </div>
-              <div className="form-group">
-                <label htmlFor="heartRate">Heart Rate:</label>
-                <input
-                  type="number"
-                  id="heartRate"
-                  placeholder="Enter heart rate"
-                  className="form-control"
-                  value={heartRate}
-                  onChange={(e) => setHeartRate(parseInt(e.target.value))}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="bloodPressure">Blood Pressure:</label>
-                <input
-                  type="text"
-                  id="bloodPressure"
-                  placeholder="Enter blood pressure"
-                  className="form-control"
-                  value={bloodPressure}
-                  onChange={(e) => setBloodPressure(e.target.value)}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="weight">Weight (Kg):</label>
-                <input
-                  type="text"
-                  id="weight"
-                  placeholder="Enter weight ing Kg"
-                  className="form-control"
-                  value={weight}
-                  onChange={(e) => setWeight(parseInt(e.target.value))}
-                />
-              </div>
-              <button type="submit" className="btn btn-primary">
-                Submit
-              </button>
             </form>
-            <div className="dir-col">
+            <div className="dir-col btns-space">
               <div className="dir-col emergency-alert">
                 <AlertMessage id={id} />
               </div>
-              <div className="dir-col">
-                <h5>
-                  CHECKLIST OF COMMON <br /> SIGN AND SYMPTOMS
-                </h5>
+              <div className="dir-col checklist">
+                <Checklist id={id} />
               </div>
             </div>
           </div>

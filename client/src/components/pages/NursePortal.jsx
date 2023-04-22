@@ -2,7 +2,8 @@ import "../styles/components.scss";
 import { useQuery } from "@apollo/client";
 import Patients from "../sections/Patients";
 import nursePortal from "../assets/nurse-portal1.png";
-import patientList from "../assets/patient-list.png";
+import update from "../assets/update.png";
+import generate from "../assets/database.png";
 import Spinner from "../elements/Spinner";
 import { GET_PATIENTS } from "../../queries/patientQueries";
 import { useNavigate } from "react-router-dom";
@@ -35,7 +36,7 @@ export default function NursePortal() {
             <h1>NURSE PORTAL</h1>
           </div>
           <div className="dir-row patient-portal-content">
-            <div className="dir-col">
+            <div className="dir-col patient-list">
               <div className="dir-row">
                 {/* <img
                   src={patientList}
@@ -46,21 +47,23 @@ export default function NursePortal() {
               </div>
               <Patients />
             </div>
-            <div className="dir-col">
+            <div className="dir-row btns-space-nurse">
               <div className="dir-col">
                 <button
-                  className="btn btn-warning"
+                  className="btn btn-warning update-btn dir-row"
                   onClick={onMotivationalTipClick}
                 >
-                  <h3>Update Daily Motivational Tip</h3>
+                  <img src={update} className="logo-small" alt="update" />
+                  <h5>Update Daily Motivational Tip</h5>
                 </button>
               </div>
               <div className="dir-col">
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-primary dir-row"
                   onClick={onMedicalConditionClick}
                 >
-                  <h3>Generate medical conditions</h3>
+                  <img src={generate} className="logo-small" alt="generate" />
+                  <h5>Generate Medical Conditions</h5>
                 </button>
               </div>
             </div>
