@@ -1,14 +1,22 @@
 import "../../styles/components.scss";
 import { useQuery, useMutation } from "@apollo/client";
-import { useState, useContext,useEffect } from "react";
+import { useState, useContext,useEffect, useRef } from "react";
 import AuthContext from "../../context/authContext";
 import patientPortal from "../../assets/patient-portal.png";
 import Spinner from "../../elements/Spinner";
 import { GET_PATIENT } from "../../../queries/patientQueries";
 import AlertMessage from "../../sections/alertMessage";
 import { UPDATE_PATIENT } from "../../../mutations/patientMutations";
+import * as tf from "@tensorflow/tfjs";
+import * as qna from "@tensorflow-models/qna";
+import dataset from "../../elements/data";
 
 export default function SymptomsCheck() {
+  const passage = dataset.dataset.join("\n");
+  const [model, setModel] = useState(null);
+  const [modelInit, setModelInit] = useState(false);
+  const [answer, setAnswer] = useState();
+
   const authContext = useContext(AuthContext);
   const { loading, error, data } = useQuery(GET_PATIENT, {
     variables: { id: authContext.userId },
@@ -29,6 +37,21 @@ export default function SymptomsCheck() {
   const [updatePatient, { loading: updateLoading, error: updateError }] = useMutation(
     UPDATE_PATIENT
   );
+
+  const loadModel = async () => {
+    const loadedModel = await qna.load();
+    setModel(loadedModel);
+    console.log("Model loaded");
+  };
+
+  const answerQuestion = async (questionString) => {
+
+    console.log("Question submitted.");
+    const question = `What produces ${questionString} ?`;
+    const answers = await model.findAnswers(question, passage);
+    setAnswer(answers);
+    console.log(answers);
+  };
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -57,8 +80,52 @@ export default function SymptomsCheck() {
         },
       ],
     });
+
+    // AI
+    let question = "";
+
+    if(fever)
+      question+= "fever, ";
+    if(cough)
+      question+= "cough, ";
+    if(shortnessOfBreath)
+      question+= "difficulty breathing, ";
+    if(fatigue)
+      question+= "fatigue, ";
+    if(bodyAches)
+      question+= "bodyAches, ";
+    if(headache)
+      question+= "headache, ";
+    if(lossOfTaste)
+      question+= "lossOfTaste, ";
+    if(lossOfSmell)
+      question+= "lossOfSmell, ";
+    if(soreThroat)
+      question+= "soreThroat, ";
+    if(congestion)
+      question+= "congestion, ";
+    if(nausea)
+      question+= "nausea, ";
+    if(diarrhea)
+      question+= "diarrhea, ";
+
+    if(question.length > 0)
+    {
+      question = question.substring(0,question.length-2); // Remove the last ", "
+      question+= "?";
+      console.log("Question: " + question);
+      answerQuestion(question);
+    }
+
   };
   useEffect(() => {
+
+    if(modelInit === false)
+    {
+      setModelInit(true);
+      loadModel();
+    }
+
     if (!loading)
     {
       setFever(data.patient.fever);
@@ -248,6 +315,19 @@ export default function SymptomsCheck() {
                   Save
                 </button>
               </form>
+
+              <div>
+                <h5>Possible Medical Conditions:</h5>
+                {answer
+                    ? answer.map((ans, idx) => (
+                        <div className="answer" key={idx}>
+                          <b>Condition {idx + 1} = </b>
+                          {ans.text}
+                        </div>
+                    ))
+                    : ""}
+              </div>
+
             </div>
           </div>
         </div>
