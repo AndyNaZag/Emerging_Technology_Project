@@ -2,16 +2,16 @@ import logo from "./../assets/medicalapp.png";
 import AuthContext from "../context/authContext";
 import { useContext } from "react";
 import { GET_ALERTS } from "../../queries/alertQueries";
-import { GET_PATIENT } from "../../queries/patientQueries";
+//import { GET_PATIENT } from "../../queries/patientQueries";
 import { useQuery } from "@apollo/client";
 import Spinner from "../elements/Spinner";
 
 export default function Header() {
   const authContext = useContext(AuthContext);
   const alerts = useQuery(GET_ALERTS);
-  const patient = useQuery(GET_PATIENT, {
-    variables: { id: authContext.userId },
-  });
+  // const patient = useQuery(GET_PATIENT, {
+  //   variables: { id: authContext.userId },
+  // });
 
   const logout = () => {
     authContext.logout();
@@ -59,7 +59,7 @@ export default function Header() {
                     </a>
                   </li>
                 )}
-                {authContext.role === "Patient" && patient.data.alertMsg && (
+                {authContext.role === "Patient" && (
                   <li className="nav-item">
                     <a className="nav-link alert-page" href="/notifications">
                       Notifications

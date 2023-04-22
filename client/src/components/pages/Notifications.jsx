@@ -30,7 +30,11 @@ export default function Notifications({ alerts }) {
               Your nurse, {data.patient.nurse.name}, wants to inform you the
               following information:{" "}
             </h5>
-            <h6>{data.patient.alertMsg}</h6>
+            <h6>
+              {data.patient.alertMsg
+                ? data.patient.alertMsg
+                : "Currently, you do not have any notifications from your nurse."}
+            </h6>
           </div>
         </>
       )}
