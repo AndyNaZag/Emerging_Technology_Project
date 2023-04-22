@@ -4,6 +4,7 @@ import AuthContext from "../context/authContext";
 import { useContext } from "react";
 import { GET_ALERTS } from "../../queries/alertQueries";
 //import { GET_PATIENT } from "../../queries/patientQueries";
+import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import Spinner from "../elements/Spinner";
 
@@ -52,20 +53,20 @@ export default function Header() {
                 </li> */}
                 {authContext.role === "Nurse" && alerts.data && (
                   <li className="nav-item">
-                    <a className="nav-link alert-page" href="/alerts">
+                    <Link className="nav-link alert-page" to="/alerts">
                       Alerts
                       <span className="alert-circle">
                         {alerts.data.emergencyAlerts.length}
                       </span>
-                    </a>
+                    </Link>
                   </li>
                 )}
                 {authContext.role === "Patient" && (
                   <li className="nav-item">
-                    <a className="nav-link alert-page" href="/notifications">
+                    <Link className="nav-link alert-page" to="/notifications">
                       Notifications
                       <span className="alert-circle">!</span>
-                    </a>
+                    </Link>
                   </li>
                 )}
                 <li className="nav-item">
