@@ -13,14 +13,19 @@ const CREATE_MOTIVATION = gql`
   }
 `;
 
+
 const GET_MOTIVATIONAL_TIPS = gql`
-  query motivationalTips($nurseId: ID!) {
-    motivationalTips(nurseId: $nurseId) {
+  query {
+    motivationalTips {
+      id
       tip
-      nurse
+      nurse {
+        id
+        name
+      }
     }
   }
 `;
-;
+
 
 export { CREATE_MOTIVATION, GET_MOTIVATIONAL_TIPS };

@@ -131,6 +131,12 @@ const RootQuery = new GraphQLObjectType({
         return EmergencyAlert.find();
       },
     },
+    motivationalTips: {
+      type: new GraphQLList(AddMotivationalTip),
+      resolve(parent, args) {
+        return MotivationalTip.find();
+      },
+    },
   },
 });
 
@@ -404,23 +410,7 @@ login: {
     }
   },
     },
-    motivationalTips: {
-      type: AddMotivationalTip,
-      args: {
-        nurseId: { type: GraphQLID },
-      },
-      resolve(parent, args) {
-        return MotivationalTip.find({ nurse: args.nurseId }).populate('nurse').then((tips) => {
-          return tips.map((tip) => {
-            return {
-              tip: tip.tip,
-              nurse: tip.nurse.name,
-            };
-          });
-        });
-      },
-    },
-    
+
     
   },
 });
