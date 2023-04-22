@@ -96,6 +96,14 @@ const AddMotivationalTip = new GraphQLObjectType({
   fields: () => ({
     tip: { type: GraphQLString },
     nurse: { type: GraphQLString },
+    nurseName:{
+      type: GraphQLString,
+      async resolve(obj) {
+        const nurseId = obj.nurse.toString();
+        const nurseData = await Nurse.findById(nurseId);
+        return nurseData.name;
+      }
+    }
   })
 });
 
