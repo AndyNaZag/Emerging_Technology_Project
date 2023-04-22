@@ -13,4 +13,17 @@ const CREATE_ALERT = gql`
   }
 `;
 
-export { CREATE_ALERT };
+const DELETE_ALERT = gql`
+  mutation DeleteEmergencyAlert($id: ID!) {
+    deleteEmergencyAlert(id: $id) {
+      id
+      patient {
+        id
+        name
+      }
+      message
+    }
+  }
+`;
+
+export { CREATE_ALERT, DELETE_ALERT };
