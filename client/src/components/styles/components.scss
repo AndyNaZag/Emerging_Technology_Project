@@ -78,6 +78,32 @@ body {
 }
 
 
+//tip
+
+
+.tip-content {
+  width: 100%;
+  max-width: 1500px;
+  height: 20%;
+  justify-content: space-around;
+  align-items: center;
+  padding: 2%;
+  gap: 30px;
+  background-color: rgba($color: #8a8a8a, $alpha: 0.5);
+  border: 2px solid $primary-color;
+  border-radius: 15px;
+
+  .emergency-alert {
+    max-width: 40vw;
+  }
+
+  #createAlertMsg {
+    .modal-header {
+      background-color: $primary-color;
+    }
+  }
+}
+
 //Patient Row Component
 .patient-row {
   cursor: pointer;

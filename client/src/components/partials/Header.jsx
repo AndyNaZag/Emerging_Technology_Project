@@ -50,6 +50,11 @@ export default function Header() {
                         Vitals
                       </a>
                     </li>
+                    <li className="nav-item">
+                      <a className="nav-link" href="/alert">
+                        Emergency Alert
+                      </a>
+                    </li>
                   </>
                 )}
                 {authContext.role === "Nurse" && (
@@ -66,7 +71,7 @@ export default function Header() {
                     </li>
                     <li className="nav-item">
                       <a className="nav-link" href="/alerts">
-                        Alerts
+                       Emergency Alerts
                       </a>
                     </li>
                   </>

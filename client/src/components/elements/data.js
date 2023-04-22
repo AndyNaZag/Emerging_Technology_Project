@@ -20,7 +20,17 @@ const dataset = [
   "Rubella produces fever, headache, tiredness, and a pink rash.",
   "Labyrinthitis produces ear pain, nausea, fever, blurred vision, headaches, pressure inside ears, fluid or pus leaking out of the ears.",
   "Pregnancy produces breast changes, fatigue, missed period, nausea and vomiting, food cravings, backache.",
-  "Covid-19 produces muscle aches, sore throat, runny nose, headhace, chest pain, difficulty breathing."
+  "Covid-19 produces muscle aches, sore throat, runny nose, headhace, chest pain, difficulty breathing.",
+  "COVID-19 produces fever, cough, shortness of breath, fatigue, body aches, headache, loss of taste, loss of smell, sore throat, congestion, nausea or vomiting, and diarrhea.",
+  "Influenza (flu) produces fever, cough, fatigue, body aches, headache, sore throat, congestion, and occasionally nausea or vomiting and diarrhea.",
+  "Bronchitis produces cough, fatigue, body aches, headache, sore throat, and occasionally fever.",
+  "Pneumonia produces cough, fever, shortness of breath, fatigue, body aches, headache, and occasionally nausea or vomiting and diarrhea.",
+  "Sinusitis produces headache, congestion, sore throat, and occasionally cough and fatigue.",
+  "Common cold produces cough, congestion, sore throat, and occasionally fever, body aches, headache, and fatigue."
+
 ];
 
 module.exports = { dataset };
+
+
+

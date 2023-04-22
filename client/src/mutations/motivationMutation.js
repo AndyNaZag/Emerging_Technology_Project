@@ -3,26 +3,18 @@ import { gql } from "@apollo/client";
 const CREATE_MOTIVATION = gql`
   mutation addMotivationalTip($tip: String!, $nurse: ID!) {
     addMotivationalTip(tip: $tip, nurse: $nurse) {
-      _id
       tip
-      nurse {
-        _id
-        name
-      }
+      nurse 
     }
   }
 `;
 
 
 const GET_MOTIVATIONAL_TIPS = gql`
-  query {
+  query motivationalTips{
     motivationalTips {
-      id
       tip
-      nurse {
-        id
-        name
-      }
+      nurseName
     }
   }
 `;

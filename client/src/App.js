@@ -13,6 +13,7 @@ import Vitals from "./components/pages/Patient/Vitals";
 import MotivationalTip from "./components/pages/Nurse/MotivationalTip";
 import PatientsList from "./components/pages/Nurse/PatientsList";
 import Alerts from "./components/pages/Nurse/Alerts";
+import AlertsPage from "./components/pages/Patient/AlertsPage";
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -92,6 +93,7 @@ function App() {
           <Route path="/patients-list" element={<PatientsList />} />
           <Route path="/motivational-tip" element={<MotivationalTip />} />
           <Route path="/alerts" element={<Alerts />} />
+          <Route path="/alert" element={<AlertsPage />} />
           </Routes>
         </AuthContext.Provider>
       </ApolloProvider>

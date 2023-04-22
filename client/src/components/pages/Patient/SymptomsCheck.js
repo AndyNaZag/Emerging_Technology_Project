@@ -80,33 +80,34 @@ export default function SymptomsCheck() {
       ],
     });
 
-    // AI
-    let question = "";
+   // AI
+let question = "";
 
-    if(fever)
-      question+= "fever, ";
-    if(cough)
-      question+= "cough, ";
-    if(shortnessOfBreath)
-      question+= "difficulty breathing, ";
-    if(fatigue)
-      question+= "fatigue, ";
-    if(bodyAches)
-      question+= "bodyAches, ";
-    if(headache)
-      question+= "headache, ";
-    if(lossOfTaste)
-      question+= "lossOfTaste, ";
-    if(lossOfSmell)
-      question+= "lossOfSmell, ";
-    if(soreThroat)
-      question+= "soreThroat, ";
-    if(congestion)
-      question+= "congestion, ";
-    if(nausea)
-      question+= "nausea, ";
-    if(diarrhea)
-      question+= "diarrhea, ";
+if (fever)
+  question += "fever, ";
+if (cough)
+  question += "cough, ";
+if (shortnessOfBreath)
+  question += "shortness of breath, ";
+if (fatigue)
+  question += "fatigue, ";
+if (bodyAches)
+  question += "body aches, ";
+if (headache)
+  question += "headache, ";
+if (lossOfTaste)
+  question += "loss of taste, ";
+if (lossOfSmell)
+  question += "loss of smell, ";
+if (soreThroat)
+  question += "sore throat, ";
+if (congestion)
+  question += "congestion, ";
+if (nausea)
+  question += "nausea or vomiting, ";
+if (diarrhea)
+  question += "diarrhea, ";
+
 
     if(question.length > 0)
     {
