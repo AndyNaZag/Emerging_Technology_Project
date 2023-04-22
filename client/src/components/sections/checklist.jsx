@@ -4,7 +4,6 @@ import { useMutation } from "@apollo/client";
 import { useState } from "react";
 import { CREATE_ALERT } from "../../mutations/alertMutations";
 import { UPDATE_PATIENT } from "../../mutations/patientMutations";
-import { set } from "mongoose";
 
 export default function Checklist({ id }) {
   const [page, setPage] = useState(0);
