@@ -1,3 +1,4 @@
+import React from "react";
 import "../styles/components.scss";
 import { FaTrash, FaUser } from "react-icons/fa";
 import { useMutation, useQuery } from "@apollo/client";

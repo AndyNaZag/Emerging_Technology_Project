@@ -1,5 +1,5 @@
+import React from "react";
 import "../styles/components.scss";
-import { FaTrash, FaUser } from "react-icons/fa";
 import { useQuery } from "@apollo/client";
 import Spinner from "../elements/Spinner";
 import bell from "../assets/bell.png";

@@ -1,3 +1,4 @@
+import React from "react";
 import "../styles/components.scss";
 import { useQuery } from "@apollo/client";
 import Patients from "../sections/Patients";

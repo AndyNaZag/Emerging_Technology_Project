@@ -1,3 +1,4 @@
+import React from "react";
 import "../styles/components.scss";
 import { useQuery, useMutation } from "@apollo/client";
 import { useState, useContext } from "react";

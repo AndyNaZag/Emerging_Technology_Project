@@ -1,8 +1,8 @@
+import React from "react";
 import "../styles/components.scss";
 import list from "../assets/list.png";
 import { useMutation } from "@apollo/client";
 import { useState } from "react";
-import { CREATE_ALERT } from "../../mutations/alertMutations";
 import { UPDATE_PATIENT } from "../../mutations/patientMutations";
 
 export default function Checklist({ id }) {

@@ -1,3 +1,4 @@
+import React from "react";
 import "../styles/components.scss";
 import alertMsg from "../assets/alert-msg.png";
 import alertMsgWhite from "../assets/alert-msg-white.png";

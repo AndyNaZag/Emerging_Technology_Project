@@ -1,3 +1,4 @@
+import React from "react";
 import "../styles/components.scss";
 import logo from "./../assets/medicalapp.png";
 import { useMutation } from "@apollo/client";

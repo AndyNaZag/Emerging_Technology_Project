@@ -1,3 +1,4 @@
+import React from "react";
 import "../styles/components.scss";
 import folder from "../assets/folder.png";
 import * as tf from "@tensorflow/tfjs";

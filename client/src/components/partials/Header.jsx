@@ -1,3 +1,4 @@
+import React from "react";
 import logo from "./../assets/medicalapp.png";
 import AuthContext from "../context/authContext";
 import { useContext } from "react";

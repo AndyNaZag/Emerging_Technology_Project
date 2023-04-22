@@ -1,3 +1,4 @@
+import React from "react";
 import "../styles/components.scss";
 import logo from "./../assets/add_user.png";
 import { useMutation, useQuery } from "@apollo/client";

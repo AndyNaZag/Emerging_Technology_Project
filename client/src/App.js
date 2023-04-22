@@ -1,3 +1,4 @@
+import React from "react";
 import Header from "./components/partials/Header";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 import NursePortal from "./components/pages/NursePortal";
