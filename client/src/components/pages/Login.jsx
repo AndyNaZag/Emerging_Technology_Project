@@ -39,7 +39,7 @@ export default function Login() {
         <form action="" className="form-login" onSubmit={submitHandler}>
           <img src={logo} alt="logo" className="mr-2" />
           <h3>
-            <b className="rto">MedApp LogIn</b>
+            <b className="rto">CheckupApp LogIn</b>
           </h3>
           <div className="form-group">
             <label htmlFor="role">User role:</label>

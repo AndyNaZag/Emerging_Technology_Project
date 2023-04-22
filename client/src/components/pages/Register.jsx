@@ -20,7 +20,7 @@ export default function Register() {
   const [weight, setWeight] = useState(0);
 
   const motivationalTip =
-    "It is never too late to start taking care of your body, welcome to medApp"; //Motivational tip by default when a patient registers
+    "It is never too late to start taking care of your body, welcome to CheckupApp"; //Motivational tip by default when a patient registers
   
     const [nurseId, setNurseId] = useState("");
     
@@ -102,7 +102,7 @@ export default function Register() {
         <form action="" className="form" onSubmit={submitHandler}>
          
           <h2>
-            <b className="rto center">Welcome to MedApp</b>
+            <b className="rto center">Welcome to CheckupApp</b>
           </h2>
           <h4>
             <b className="rto center mt-2">

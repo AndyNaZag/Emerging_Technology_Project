@@ -15,7 +15,7 @@ export default function Header() {
         <a className="navbar-brand" href="/">
           <div className="d-flex">
             <img src={logo} alt="logo" className="mr-2" />
-            <div>MedApp</div>
+            <div>CheckupApp</div>
           </div>
         </a>
         <button
