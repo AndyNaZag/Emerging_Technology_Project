@@ -1,6 +1,6 @@
 import React from "react";
-import patientList from "../assets/patient-list.png";
-import Patients from "../sections/Patients";
+import patientList from "../../assets/patient-list.png";
+import Patients from "../../sections/Patients";
 
 const PatientsList = () => (
     <section className="wrapper wp-bgw ">

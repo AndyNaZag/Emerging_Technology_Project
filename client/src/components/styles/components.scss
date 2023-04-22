@@ -94,6 +94,29 @@ body {
   object-fit: contain;
   margin-right: 10px;
 }
+.nurse-portal-content {
+  width: 70%;
+  max-width: 1500px;
+  height: 70%;
+  justify-content: space-around;
+  align-items: center;
+  padding: 5%;
+  gap: 30px;
+  background-color: rgba($color: $primary-color, $alpha: 0.9);
+  border: 1px solid $primary-color;
+  border-radius: 20px;
+
+  .emergency-alert {
+    max-width: 40vw;
+  }
+
+  #createAlertMsg {
+    .modal-header {
+      background-color: $primary-color;
+    }
+  }
+}
+
 
 //Patient Portal Component
 
@@ -119,6 +142,30 @@ body {
     }
   }
 }
+
+.patient-portal-content1 {
+  width: 60%;
+  max-width: 1500px;
+  height: 90%;
+  justify-content: space-around;
+  align-items: center;
+  padding: 5%;
+  gap: 10px;
+  background-color: rgba($color: #43c4c9, $alpha: 0.9);
+  border: 1px solid $primary-color;
+  border-radius: 20px;
+
+  .emergency-alert {
+    max-width: 40vw;
+  }
+
+  #createAlertMsg {
+    .modal-header {
+      background-color: $primary-color;
+    }
+  }
+}
+
 
 
 .motivational-tip {

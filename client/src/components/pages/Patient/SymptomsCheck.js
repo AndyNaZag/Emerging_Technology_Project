@@ -1,12 +1,12 @@
-import "../styles/components.scss";
+import "../../styles/components.scss";
 import { useQuery, useMutation } from "@apollo/client";
 import { useState, useContext,useEffect } from "react";
-import AuthContext from "../context/authContext";
-import patientPortal from "../assets/patient-portal.png";
-import Spinner from "../elements/Spinner";
-import { GET_PATIENT } from "../../queries/patientQueries";
-import AlertMessage from "../sections/alertMessage";
-import { UPDATE_PATIENT } from "../../mutations/patientMutations";
+import AuthContext from "../../context/authContext";
+import patientPortal from "../../assets/patient-portal.png";
+import Spinner from "../../elements/Spinner";
+import { GET_PATIENT } from "../../../queries/patientQueries";
+import AlertMessage from "../../sections/alertMessage";
+import { UPDATE_PATIENT } from "../../../mutations/patientMutations";
 
 export default function SymptomsCheck() {
   const authContext = useContext(AuthContext);

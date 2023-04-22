@@ -1,18 +1,18 @@
 import Header from "./components/partials/Header";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
-import NursePortal from "./components/pages/NursePortal";
-import PatientPortal from "./components/pages/PatientPortal";
+import NursePortal from "./components/pages/Nurse/NursePortal";
+import PatientPortal from "./components/pages/Patient/PatientPortal";
 import Login from "./components/pages/Login";
 import AuthContext from "./components/context/authContext";
 import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Register from "./components/pages/Register";
-import MotivationTip from "./components/pages/MotivationTip";
-import SymptomsCheck from "./components/pages/SymptomsCheck";
-import Vitals from "./components/pages/Vitals";
-import MotivationalTip from "./components/pages/MotivationalTip";
-import PatientsList from "./components/pages/PatientsList";
-import Alerts from "./components/pages/Alerts";
+import MotivationTip from "./components/pages/Patient/MotivationTip";
+import SymptomsCheck from "./components/pages/Patient/SymptomsCheck";
+import Vitals from "./components/pages/Patient/Vitals";
+import MotivationalTip from "./components/pages/Nurse/MotivationalTip";
+import PatientsList from "./components/pages/Nurse/PatientsList";
+import Alerts from "./components/pages/Nurse/Alerts";
 
 const cache = new InMemoryCache({
   typePolicies: {
