@@ -30,11 +30,11 @@ export default function Alerts({ alerts }) {
   return (
     <section className="wrapper wp-bgw">
       <div className="dir-row">
-        <img
+        {/* <img
           src={alertIcon}
           alt="Patient List Logo"
           className="mr-2 logo-big"
-        />
+        /> */}
         <h1>ALERT MESSAGES</h1>
       </div>
       {!data.loading && !data.error && (
