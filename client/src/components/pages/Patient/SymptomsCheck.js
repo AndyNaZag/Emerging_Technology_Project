@@ -6,7 +6,7 @@ import patientPortal from "../../assets/patient-portal.png";
 import Spinner from "../../elements/Spinner";
 import { GET_PATIENT } from "../../../queries/patientQueries";
 import AlertMessage from "../../sections/alertMessage";
-import { UPDATE_PATIENT } from "../../../mutations/patientMutations";
+import { UPDATE_PATIENT_SYMPTOMS } from "../../../mutations/patientMutations";
 import * as tf from "@tensorflow/tfjs";
 import * as qna from "@tensorflow-models/qna";
 import dataset from "../../elements/data";
@@ -35,7 +35,7 @@ export default function SymptomsCheck() {
   const [nausea, setNausea] = useState(false);
   const [diarrhea, setDiarrhea] = useState(false);
   const [updatePatient, { loading: updateLoading, error: updateError }] = useMutation(
-    UPDATE_PATIENT
+      UPDATE_PATIENT_SYMPTOMS
   );
 
   const loadModel = async () => {
@@ -48,6 +48,7 @@ export default function SymptomsCheck() {
 
     console.log("Question submitted.");
     const question = `What produces ${questionString} ?`;
+    console.log("Question: " + question);
     const answers = await model.findAnswers(question, passage);
     setAnswer(answers);
     console.log(answers);
@@ -58,7 +59,6 @@ export default function SymptomsCheck() {
     updatePatient({
       variables: {
         id: id,
-        symptomsInput: {
           fever: fever,
           cough: cough,
           shortnessOfBreath: shortnessOfBreath,
@@ -71,7 +71,6 @@ export default function SymptomsCheck() {
           congestion: congestion,
           nausea: nausea,
           diarrhea: diarrhea,
-        },
       },
       refetchQueries: [
         {
@@ -113,7 +112,6 @@ export default function SymptomsCheck() {
     {
       question = question.substring(0,question.length-2); // Remove the last ", "
       question+= "?";
-      console.log("Question: " + question);
       answerQuestion(question);
     }
 
@@ -145,6 +143,7 @@ export default function SymptomsCheck() {
   }, [loading]);
 
   if (loading) return <Spinner />;
+  if(model == null) return <Spinner />;
   if (error) return <AlertMessage message={error.message} />;
 
   return (

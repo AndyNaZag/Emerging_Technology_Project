@@ -31,6 +31,18 @@ const GET_PATIENT = gql`
         id
         name
       }
+      fever
+      cough
+      shortnessOfBreath
+      fatigue
+      bodyAches
+      headache
+      lossOfTaste
+      lossOfSmell
+      soreThroat
+      congestion
+      nausea
+      diarrhea
     }
   }
 `;

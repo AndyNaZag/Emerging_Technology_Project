@@ -72,6 +72,51 @@ const UPDATE_PATIENT = gql`
   }
 `;
 
+const UPDATE_PATIENT_SYMPTOMS = gql`
+  mutation updatePatientSymptoms(
+    $id: ID!
+    $fever: Boolean
+    $cough: Boolean
+    $shortnessOfBreath: Boolean
+    $fatigue: Boolean
+    $bodyAches: Boolean
+    $headache: Boolean
+    $lossOfTaste: Boolean
+    $soreThroat: Boolean
+    $congestion: Boolean
+    $nausea: Boolean
+    $diarrhea: Boolean
+  ) {
+    updatePatientSymptoms(
+      id: $id
+      fever: $fever
+      cough: $cough
+      shortnessOfBreath: $shortnessOfBreath
+      fatigue: $fatigue
+      bodyAches: $bodyAches
+      headache: $headache
+      lossOfTaste: $lossOfTaste
+      soreThroat: $soreThroat
+      congestion: $congestion
+      nausea: $nausea
+      diarrhea: $diarrhea
+    ) {
+      id
+      fever
+      cough
+      shortnessOfBreath
+      fatigue
+      bodyAches
+      headache
+      lossOfTaste
+      soreThroat
+      congestion
+      nausea
+      diarrhea
+    }
+  }
+`;
+
 const DELETE_PATIENT = gql`
   mutation DeletePatient($id: ID!) {
     deletePatient(id: $id) {
@@ -87,4 +132,4 @@ const DELETE_PATIENT = gql`
   }
 `;
 
-export { CREATE_PATIENT, UPDATE_PATIENT, DELETE_PATIENT };
+export { CREATE_PATIENT, UPDATE_PATIENT, UPDATE_PATIENT_SYMPTOMS, DELETE_PATIENT };

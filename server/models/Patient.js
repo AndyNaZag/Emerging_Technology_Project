@@ -26,6 +26,44 @@ const PatientSchema = new mongoose.Schema({
   weight: {
     type: Number,
   },
+
+  // Sympthons
+  fever:{
+    type: Boolean
+  },
+  cough:{
+    type: Boolean
+  },
+  shortnessOfBreath:{
+    type: Boolean
+  },
+  fatigue:{
+    type: Boolean
+  },
+  bodyAches:{
+    type: Boolean
+  },
+  headache:{
+    type: Boolean
+  },
+  lossOfTaste:{
+    type: Boolean
+  },
+  lossOfSmell:{
+    type: Boolean
+  },
+  soreThroat:{
+    type: Boolean
+  },
+  congestion:{
+    type: Boolean
+  },
+  nausea:{
+    type: Boolean
+  },
+  diarrhea:{
+    type: Boolean
+  }
  
 });
 

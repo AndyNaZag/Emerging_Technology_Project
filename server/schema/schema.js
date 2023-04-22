@@ -10,6 +10,7 @@ const {
   GraphQLID,
   GraphQLString,
   GraphQLInt,
+  GraphQLBoolean,
   GraphQLEnumType,
   GraphQLSchema,
   GraphQLList,
@@ -28,6 +29,18 @@ const PatientType = new GraphQLObjectType({
     heartRate: { type: GraphQLInt },
     bloodPressure: { type: GraphQLString },
     weight: { type: GraphQLInt },
+    fever: {type: GraphQLBoolean},
+    cough: {type: GraphQLBoolean},
+    shortnessOfBreath: {type: GraphQLBoolean},
+    fatigue: {type: GraphQLBoolean},
+    bodyAches: {type: GraphQLBoolean},
+    headache: {type: GraphQLBoolean},
+    lossOfTaste: {type: GraphQLBoolean},
+    lossOfSmell: {type: GraphQLBoolean},
+    soreThroat: {type: GraphQLBoolean},
+    congestion: {type: GraphQLBoolean},
+    nausea: {type: GraphQLBoolean},
+    diarrhea: {type: GraphQLBoolean},
    // motivationalTip: { type: GraphQLString },
     nurse: {
       type: NurseType,
@@ -334,6 +347,49 @@ login: {
             },
           },
           { new: true }
+        );
+      },
+    },
+    // Update sympthons
+    updatePatientSymptoms: {
+      type: PatientType,
+      args: {
+        id: { type: new
+          GraphQLNonNull(GraphQLID) },
+        fever : {type: GraphQLBoolean},
+        cough : {type: GraphQLBoolean},
+        shortnessOfBreath : {type: GraphQLBoolean},
+        fatigue : {type: GraphQLBoolean},
+        bodyAches : {type: GraphQLBoolean},
+        headache : {type: GraphQLBoolean},
+        lossOfTaste : {type: GraphQLBoolean},
+        soreThroat : {type: GraphQLBoolean},
+        congestion : {type: GraphQLBoolean},
+        nausea : {type: GraphQLBoolean},
+        diarrhea : {type: GraphQLBoolean},
+      },
+      resolve(parent, args, req) {
+        // if (!req.isAuth) {
+        //   throw new Error("Unauthenticated!");
+        // }                                          //Only if the user is authenticated
+        return Patient.findByIdAndUpdate(
+            args.id,
+            {
+              $set: {
+                fever: args.fever,
+                cough: args.cough,
+                shortnessOfBreath: args.shortnessOfBreath,
+                fatigue: args.fatigue,
+                bodyAches: args.bodyAches,
+                headache: args.headache,
+                lossOfTaste: args.lossOfTaste,
+                soreThroat: args.soreThroat,
+                congestion: args.congestion,
+                nausea: args.nausea,
+                diarrhea: args.diarrhea,
+              },
+            },
+            { new: true }
         );
       },
     },
