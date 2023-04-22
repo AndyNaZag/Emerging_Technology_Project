@@ -19,7 +19,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "npm i @tensorflow/tfjs-node --unsafe-perm=true --allow-root @tensorflow-models/qna --force && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "scss": "sass --whatch scss -o css"
