@@ -1,6 +1,7 @@
 const Nurse = require("../models/Nurse.js");
 const Patient = require("../models/Patient.js");
 const EmergencyAlert = require("../models/EmergencyAlert.js");
+const MotivationalTip = require("../models/MotivationalTip.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -74,6 +75,15 @@ const AuthData = new GraphQLObjectType({
     tokenExpiration: { type: GraphQLInt },
     nurseName: { type: GraphQLString },
   }),
+});
+
+// AddMotivationalTip mutation
+const AddMotivationalTip = new GraphQLObjectType({
+  name: 'AddMotivationalTip',
+  fields: () => ({
+    tip: { type: GraphQLString },
+    nurse: { type: GraphQLString },
+  })
 });
 
 
@@ -360,6 +370,58 @@ login: {
         return EmergencyAlert.findByIdAndRemove(args.id);
       },
     },
+    addMotivationalTip: {
+      type : AddMotivationalTip,
+    args: {
+    tip: { type: new GraphQLNonNull(GraphQLString) },
+    nurse: { type: new GraphQLNonNull(GraphQLID) },
+  },
+  async resolve(parent, args) {
+    try {
+      // Find the nurse who added the tip
+      const nurse = await Nurse.findById(args.nurse);
+      if (!nurse) {
+        throw new Error('Nurse not found');
+      }
+
+      // Create a new motivational tip
+      const tip = new MotivationalTip({
+        tip: args.tip,
+        nurse: nurse._id,
+      });
+
+      // Save the new tip to the database
+      const savedTip = await tip.save();
+
+      // Return the saved tip data
+      return {
+        tip: savedTip.tip,
+        nurse: nurse.name,
+      };
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  },
+    },
+    motivationalTips: {
+      type: AddMotivationalTip,
+      args: {
+        nurseId: { type: GraphQLID },
+      },
+      resolve(parent, args) {
+        return MotivationalTip.find({ nurse: args.nurseId }).populate('nurse').then((tips) => {
+          return tips.map((tip) => {
+            return {
+              tip: tip.tip,
+              nurse: tip.nurse.name,
+            };
+          });
+        });
+      },
+    },
+    
+    
   },
 });
 
