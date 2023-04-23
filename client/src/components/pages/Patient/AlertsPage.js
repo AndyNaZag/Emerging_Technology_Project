@@ -42,7 +42,7 @@ export default function AlertsPage({ alerts }) {
 
   return (
     <section className="wrapper wp-bgw">
-      <div className="nurse-portal-content">
+      <div className="nurse-portal-content1">
         <div className="dir-col center">
         <img
                 src={patientPortal}
