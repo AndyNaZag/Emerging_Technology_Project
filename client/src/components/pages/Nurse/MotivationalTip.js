@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { CREATE_MOTIVATION, GET_MOTIVATIONAL_TIPS} from "../../../mutations/motivationMutation";
 import { useState, useContext, useEffect } from "react";
 import AuthContext from "../../context/authContext";
-
+import patientPortal from "../../assets/Motivate.png";
 export default function MotivationalTip() {
   const [tip, setTip] = useState("");
   const authContext = useContext(AuthContext);
@@ -35,7 +35,13 @@ export default function MotivationalTip() {
   return (
     <section className="wrapper wp-bgw">
       <div className="nurse-portal-content">
-        <div className="dir-row center">
+      <div className="dir-col center">
+        <img
+                src={patientPortal}
+                alt="Patient Vitals"
+                className="img-fluid d-block mx-auto mb-4"
+                style={{ width: "100px", height: "125px" }}
+              />
           <h1>Add a Motivational Tip</h1>
         </div>
         <form onSubmit={handleSubmit}>

@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { GET_MOTIVATIONAL_TIPS } from "../../../mutations/motivationMutation";
 import Spinner from "../../elements/Spinner";
-
+import patientPortal from "../../assets/Motivate.png";
 function MotivationalTips() {
   const { loading, error, data } = useQuery(GET_MOTIVATIONAL_TIPS);
 
@@ -13,8 +13,15 @@ function MotivationalTips() {
   return (
     <section className="wrapper wp-bgw">
       <div className="nurse-portal-content">
-        <div className="dir-row center">
+        <div className="dir-col center">
+        <img
+                src={patientPortal}
+                alt="Patient Vitals"
+                className="img-fluid d-block mx-auto mb-4"
+                style={{ width: "100px", height: "125px" }}
+              />
           <h1>MOTIVATIONAL TIPS</h1>
+         
         </div>
         {!data.loading && !data.error && (
           <div className="tip-row mt-4">

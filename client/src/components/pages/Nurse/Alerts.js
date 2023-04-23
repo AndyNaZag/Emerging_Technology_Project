@@ -8,7 +8,7 @@ import { DELETE_ALERT } from "../../../mutations/alertMutations";
 import { useState } from "react";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
-
+import patientPortal from "../../assets/Alert12.png";
 export default function Alerts({ alerts }) {
   const { loading, error, data } = useQuery(GET_ALERTS);
   const [id, setId] = useState(null);
@@ -45,12 +45,13 @@ export default function Alerts({ alerts }) {
   return (
     <section className="wrapper wp-bgw">
       <div className="nurse-portal-content">
-        <div className="dir-row center">
-          {/* <img
-            src={alertIcon}
-            alt="Patient List Logo"
-            className="mr-2 logo-big"
-          /> */}
+      <div className="dir-col center">
+        <img
+                src={patientPortal}
+                alt="Patient Vitals"
+                className="img-fluid d-block mx-auto mb-4"
+                style={{ width: "125px", height: "125px" }}
+              />
           <h1>ALERT MESSAGES</h1>
         </div>
         {!data.loading && !data.error && (

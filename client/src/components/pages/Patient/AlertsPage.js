@@ -6,7 +6,7 @@ import { CREATE_ALERT } from "../../../mutations/alertMutations";
 import { useState, useContext, useEffect } from "react";
 import AuthContext from "../../context/authContext";
 import { GET_PATIENT } from "../../../queries/patientQueries";
-
+import patientPortal from "../../assets/Alert12.png";
 export default function AlertsPage({ alerts }) {
   const [message, setMessage] = useState("");
   const [alertCreated, setAlertCreated] = useState(false);
@@ -43,7 +43,13 @@ export default function AlertsPage({ alerts }) {
   return (
     <section className="wrapper wp-bgw">
       <div className="nurse-portal-content">
-        <div className="dir-row center">
+        <div className="dir-col center">
+        <img
+                src={patientPortal}
+                alt="Patient Vitals"
+                className="img-fluid d-block mx-auto mb-4"
+                style={{ width: "125px", height: "125px" }}
+              />
           <h1>ALERT MESSAGES</h1>
         </div>
         <form onSubmit={handleSubmit}>
