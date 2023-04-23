@@ -12,12 +12,23 @@ const NursePortal = () => {
   const { loading, error, data } = useQuery(GET_SINGLE_NURSE, {
     variables: { nurseId },
   });
- 
+
   if (loading) return <Spinner />;
   if (error) return <p>Error: Something went wrong</p>;
   if (!data.nurse) return <p>No nurse found</p>;
 
   const { name } = data.nurse;
+  const currentTime = new Date();
+  const currentHour = currentTime.getHours();
+
+  let greeting;
+  if (currentHour < 12) {
+    greeting = "Good morning";
+  } else if (currentHour < 18) {
+    greeting = "Good afternoon";
+  } else {
+    greeting = "Good evening";
+  }
 
   return (
     <section className="wrapper wp-bgw ">
@@ -33,25 +44,23 @@ const NursePortal = () => {
           </div>
           <div className="motivational-tip">
             <div className="dir-row">
-              <h3>Hi, {name}!</h3>
-              </div>
-              </div>
-            <div className="patient-portal-control mt-4">
-              <p>Welcome to the Nurse Portal. Here, you can:</p>
-              <ul>
-                <li>Update motivational tips for your patients</li>
-                <li>Send alerts to your patients</li>
-                <li>Check the list of patients</li>
-                <li>Update patient information</li>
-              </ul>
-              </div>
-              <p>Thank you for all your hard work!</p>
+              <h3>{greeting}, {name}!</h3>
             </div>
           </div>
-   
-  
+          <div className="patient-portal-control mt-4">
+            <p>Welcome to the Nurse Portal. Here, you can:</p>
+            <ul>
+              <li>Update motivational tips for your patients</li>
+              <li>Send alerts to your patients</li>
+              <li>Check the list of patients</li>
+              <li>Update patient information</li>
+            </ul>
+          </div>
+          <p>Thank you for all your hard work!</p>
+        </div>
+      </div>
     </section>
   );
-}
+};
 
 export default NursePortal;

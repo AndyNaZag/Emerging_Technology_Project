@@ -2,7 +2,7 @@ import "../../styles/components.scss";
 import { useQuery, useMutation } from "@apollo/client";
 import { useState, useContext, useEffect  } from "react";
 import AuthContext from "../../context/authContext";
-import patientPortal from "../../assets/patient-portal.png";
+import patientPortal from "../../assets/vital12.png";
 import Spinner from "../../elements/Spinner";
 import { GET_PATIENT } from "../../../queries/patientQueries";
 import AlertMessage from "../../sections/alertMessage";
@@ -58,17 +58,16 @@ export default function Vitals() {
 
 
   return (
-    <div className="container">
+    <div className="wrapper wp-bgw">
+      <div className="nurse-portal-content">
       <div className="row">
         <div className="col-md-6 offset-md-3">
-          <div className="card border-0 shadow">
-            <div className="card-body p-5">
-              <h2 className="text-center mb-4">Patient Vitals</h2>
+                          <h2 className="text-center mb-4">Patient Vitals</h2>
               <img
                 src={patientPortal}
                 alt="Patient Vitals"
                 className="img-fluid d-block mx-auto mb-4"
-                style={{ width: "128px", height: "128px" }}
+                style={{ width: "100px", height: "100px" }}
               />
 
               <form onSubmit={handleFormSubmit}>
@@ -116,6 +115,7 @@ export default function Vitals() {
                     onChange={(e) => setWeight(e.target.value)}
                     />
                     </div>
+                    <div className="center mt-4">
                       <button type="submit" className="btn btn-primary btn-block mt-4">
                                   {updateLoading ? (
                                     <Spinner color="text-light" size="sm" />
@@ -123,12 +123,13 @@ export default function Vitals() {
                                     "Save Vitals"
                                   )}
                                 </button>
+                                </div>
                                 {updateError && <AlertMessage message={updateError.message} />}
                               </form>
                             </div>
                           </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
+                                         
                     );
                     }

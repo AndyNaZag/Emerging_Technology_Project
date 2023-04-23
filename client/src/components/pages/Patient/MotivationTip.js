@@ -8,6 +8,8 @@ function MotivationalTips() {
   if (loading) return <Spinner />;
   if (error) return <p>Error: Something went wrong</p>;
 
+  const lastTip = data.motivationalTips.slice(-1)[0]; // get the last tip from the array
+
   return (
     <section className="wrapper wp-bgw">
       <div className="nurse-portal-content">
@@ -15,16 +17,12 @@ function MotivationalTips() {
           <h1>MOTIVATIONAL TIPS</h1>
         </div>
         {!data.loading && !data.error && (
-          <ul className="list-unstyled mt-3">
-            {data.motivationalTips.map((tip) => (
-              <li className="tip-row" key={tip.id}>
-                <div className="tip-content">
-                  <p>{tip.tip}</p>
-                  <small>by {tip.nurseName}</small>
-                </div>
-              </li>
-            ))}
-          </ul>
+          <div className="tip-row mt-4">
+            <div className="tip-content mt-4">
+              <p>{lastTip.tip}</p>
+              <small>- {lastTip.nurseName}</small>
+            </div>
+          </div>
         )}
       </div>
     </section>

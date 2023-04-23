@@ -30,18 +30,19 @@ export default function Patients() {
       weight,
       nurseId,
     },
-   update(cache, { data: { updatePatient } }) {
-  const { patients } = cache.readQuery({ query: GET_PATIENTS });
-  const index = patients.findIndex((p) => p.id === updatePatient.id);
-  const newPatients = [...patients];
-  newPatients[index] = updatePatient;
-  cache.writeQuery({
-    query: GET_PATIENTS,
-    data: { patients: newPatients },
+    update(cache, { data: { updatePatient } }) {
+      const { patients } = cache.readQuery({ query: GET_PATIENTS });
+      const index = patients.findIndex((p) => p.id === updatePatient.id);
+      const newPatients = [...patients];
+      newPatients[index] = updatePatient;
+      cache.writeQuery({
+        query: GET_PATIENTS,
+        data: { patients: newPatients },
+      });
+    },
+    refetchQueries: [{ query: GET_PATIENTS }]
   });
-},
-
-  });
+  
 
   const onPatientClick = (patient) => {
     setPatient(patient);
@@ -116,8 +117,8 @@ export default function Patients() {
               {patients.data.patients.map((patient) => (
                 <tr
                   className="patient-row"
-                  data-bs-toggle="modal"
-                  data-bs-target="#updatePatientModal"
+                  // data-bs-toggle="modal"
+                  // data-bs-target="#updatePatientModal"
                   key={patient.id}
                   onClick={() => {
                     onPatientClick(patient);

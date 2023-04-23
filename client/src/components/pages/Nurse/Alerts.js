@@ -68,7 +68,8 @@ export default function Alerts({ alerts }) {
                   <tr className="patient-row" key={alert.id}>
                     <td>
                       <FaUser className="icon" />
-                      {alert.patient.name}
+                      {alert.patient && alert.patient.name}
+                     
                     </td>
                     <td>{alert.message}</td>
                     <td>
